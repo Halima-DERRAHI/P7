@@ -72,6 +72,8 @@ header {
   grid-template-columns: 1fr 1fr;
   gap: 10px;
   height: 186px;
+  padding: 10px;
+  font-family: 'Lato', sans-serif;
 }
 .reciep-title {
   font-size: 18px;
@@ -80,9 +82,12 @@ header {
 .reciep-ingredients {
   list-style-type: none;
   overflow: auto;
+  font-size: 12px;
+  padding: 0;
 }
 .reciep-steps {
   text-overflow: ellipsis;
   overflow-y: auto;
   overflow-x: hidden;
+  font-size: 12px;
 }
