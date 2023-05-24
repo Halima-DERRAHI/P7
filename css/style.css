@@ -1,0 +1,88 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  box-sizing: inherit;
+  text-decoration: none;
+}
+
+body {
+  box-sizing: border-box;
+  background-color: white;
+  max-width: 1400px;
+  margin: auto;
+}
+
+header {
+  display: flex;
+  justify-content: center;
+}
+
+.logo {
+  width: 268px;
+  padding: 50px;
+}
+
+.search-container {
+  margin: auto 70px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+}
+
+.input_search {
+  border: none;
+  border-radius: 5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  background: #E7E7E7;
+  height: 69px;
+  padding: 0 30px;
+}
+
+.glass-icon {
+  color: black;
+  margin-left: -40px;
+  cursor: pointer;
+}
+
+.reciepes-container {
+  margin: 70px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  gap: 50px;
+}
+.recieps {
+  height: 380px;
+  width: 364px;
+}
+.reciep-picture {
+  width: auto;
+  height: 175px;
+  background-color: #c7bebe;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.reciep-description {
+  background-color: #E7E7E7;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  height: 186px;
+}
+.reciep-title {
+  font-size: 18px;
+  align-self: flex-start;
+}
+.reciep-ingredients {
+  list-style-type: none;
+  overflow: auto;
+}
+.reciep-steps {
+  text-overflow: ellipsis;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
