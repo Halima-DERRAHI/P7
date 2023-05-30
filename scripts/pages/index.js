@@ -5,3 +5,25 @@ async function getRecipes() {
 
 	return recipes;
 }
+
+function displayRecipes(recipes) {
+	const reciepContainer = document.querySelector(".recipes-container");
+	for (let i = 0; i < recipes.length; i++) {
+		const recipe = recipes[i];
+		const recipeModel = recipesFactory(recipe);
+		const recipeCardDOM = recipeModel.recipeCardDOM();
+		reciepContainer.appendChild(recipeCardDOM);
+	}
+}
+
+
+async function init() {
+
+	const { recipes } = await getRecipes();
+	displayRecipes(recipes);
+}
+
+window.onload = function()
+{
+	init();
+};
