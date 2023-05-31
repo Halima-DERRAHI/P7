@@ -15,12 +15,38 @@
         <a href="index.html"><img src="assets/images/logo.png" class="logo" alt="Logo les petits plats"></a>
     </header>
     <main id="main">
+
+      <!-- Search -->
+
       <div class="search-container">
         <input class="input_search" type="text" placeholder="Rechercher une recette">
         <span class="glass-icon">
           <i class="fa fa-search"></i>
         </span>
       </div> 
+
+      <!-- Select -->
+      
+      <div class="select-container">
+        <div class="select select-ingredients">
+            <span>Ingredients</span>
+            <input type="text" class="search-input" placeholder="Rechercher un ingrédient">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="select select-appareils">
+          <span>Appareils</span>
+          <input type="text" class="search-input" placeholder="Rechercher un appareil">
+          <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="select select-ustensiles">
+          <span>Ustensiles</span>
+          <input type="text" class="search-input" placeholder="Rechercher un ustensile">
+          <i class="fas fa-chevron-down"></i>
+        </div>
+      </div>
+
+      <!--  Recipe  -->
+
       <div class="recipes-container">
         <!--<div class="recipe-card">
           <div class="recipe-picture"></div>
@@ -43,6 +69,7 @@
       </div>     
     </main>
     <script src="scripts/pages/index.js" ></script>
-    <script src="scripts/pages/recipesFactory.js" ></script>
+    <script src="scripts/factory/recipesFactory.js" ></script>
+    <script src="scripts/utils/select.js" ></script>
   </body>
 </html>

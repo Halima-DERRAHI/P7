@@ -26,7 +26,7 @@ function recipesFactory(recipe) {
 		timeIcon.classList.add("fa-sharp", "fa-regular", "fa-clock");
 		timeDiv.appendChild(timeIcon);
 
-		const recipeTiming = document.createElement("p");
+		const recipeTiming = document.createElement("span");
 		recipeTiming.classList.add("recipe-timing");
 		recipeTiming.textContent = time + " min";
 		timeDiv.appendChild(recipeTiming);
@@ -40,13 +40,15 @@ function recipesFactory(recipe) {
 			const ingredient = document.createElement("li");
 
 			const ingredientName = document.createElement("b");
-			ingredientName.textContent = ingredients[i].ingredient + ": ";
+			ingredientName.textContent = ingredients[i].ingredient;
 			ingredient.appendChild(ingredientName);
-
-			const ingredientQuantity = document.createElement("span");
-			ingredientQuantity.classList.add("quantity");
-			ingredientQuantity.textContent = ingredients[i].quantity;
-			ingredient.appendChild(ingredientQuantity);
+			
+			if (ingredients[i].quantity) {
+				const ingredientQuantity = document.createElement("span");
+				ingredientQuantity.classList.add("quantity");
+				ingredientQuantity.textContent = ": " + ingredients[i].quantity;
+				ingredient.appendChild(ingredientQuantity);
+			}
 
 			if (ingredients[i].unit) {
 				const ingredientUnit = document.createElement("span");
