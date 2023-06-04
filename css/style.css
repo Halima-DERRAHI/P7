@@ -61,7 +61,11 @@ header {
 .recipe-picture {
   width: auto;
   height: 175px;
-  background-color: #c7bebe;
+}
+.recipe-picture img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
@@ -116,14 +120,14 @@ header {
 /*** Select ***/
 
 
-.select-container {
+.filters-container {
   display: flex;
   justify-self: flex-start;
   padding: 20px 0;
   margin-bottom: 50px;
 }
 .select {
-  width: 170px;
+  min-width: 170px;
   height: 69px;
   border-radius: 5px;
   color: white;
@@ -133,46 +137,178 @@ header {
   font-weight: 700;
   font-size: 18px;
   margin-right: 20px;
-  cursor: pointer;
 }
 .select.active{
-  width: 270px;
+  min-width: 667px;
 }
-.fa-chevron-down {
-  /*font-family: "Font Awesome 5 Free";
-  content: "\f104";
-  position: absolute;*/
-  font-weight: 900;
-  transform: translate(-50%, 0%) rotate(0deg)scaleX(-1);
-  color: #fff;
-  font-size: 20px;
-  pointer-events: none;
-  transition: all 250ms ease-in-out;
+
+.filter {
+  display: flex;
+  justify-content: space-around;
 }
-.select.active .fa-chevron-down {
-  transform: translate(-50%, 0%) rotate(180deg);
+.filter-list {
+  position: absolute;
+  overflow: scroll;
+  width: 667px;
+  height: auto;
+  max-height: 275px;
+  flex-wrap: wrap;
+  margin-top: 70px;
+  padding: 0;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
-.select-ingredients {
+.filter-items {
+  width: 30%;
+  cursor: pointer;
+  list-style: none;
+  text-align: center;
+}
+.filter-items i {
+  cursor: pointer;
+}
+
+.tags-items {
+  border-radius: 5px;
+  width: 107px;
+  height: 37px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 5px 0;
+  font-size: 16px;
+  font-weight: 700;
+  padding: 10px;
+}
+
+.filter-ingredients,
+.filter-ingredients_list,
+.filter-ingredients_items {
+  background-color: #3282F7;
+}
+
+.filter-appareils,
+.filter-appareils_list,
+.filter-appareils_items {
+  background-color: #68D9A4;
+}
+
+.filter-ustensiles,
+.filter-ustensiles_list,
+.filter-ustensiles_items {
+  background-color: #ED6454;
+}
+
+/*
+.filter-ingredients {
   background-color: #3282F7;
   display: flex;
   justify-content: space-around;
 }
-.select.active span {
-  display: block;
+.filter-ingredients_list {
+  background-color: #3282F7;
+  overflow: scroll;
+  position: absolute;
+  width: 667px;
+  height: auto;
+  max-height: 275px;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 70px;
+  padding: 0;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
-.select.active span {
-  display: none;
+.filter-ingredients_items {
+  background-color: #3282F7;
+  border-radius: 5px;
+  width: 107px;
+  height: 37px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 5px 0;
+  font-size: 14px;
+  font-weight: 700;
 }
-.select-appareils {
+
+.filter-appareils {
   background-color: #68D9A4;
   display: flex;
   justify-content: space-around;
 }
-.select-ustensiles {
+.filter-appareils_list {
+  background-color: #68D9A4;
+  overflow: scroll;
+  position: absolute;
+  width: 667px;
+  height: auto;
+  max-height: 275px;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 70px;
+  padding: 0;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.filter-appareils_items {
+  background-color: #68D9A4;
+  border-radius: 5px;
+  width: 107px;
+  height: 37px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 5px 0;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.filter-ustensiles {
   background-color: #ED6454;
   display: flex;
   justify-content: space-around;
 }
+.filter-ustensiles_list {
+  background-color: #ED6454;
+  overflow: scroll;
+  position: absolute;
+  width: 667px;
+  height: auto;
+  max-height: 275px;
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 70px;
+  padding: 0;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+.filter-ustensiles_items {
+  background-color: #ED6454;
+  border-radius: 5px;
+  width: 107px;
+  height: 37px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 5px 0;
+  font-size: 14px;
+  font-weight: 700;
+}*/
+
+.tags{
+  display: flex;
+}
+.tags-container {
+  width: 170px;
+  height: auto;
+  margin-right: 20px;
+}
+
 .search-input {
   width: 100%;
   height: 100%;
@@ -190,4 +326,7 @@ header {
 .search-input::placeholder {
   color: white;
   opacity: 0.5;
+}
+.select.active .icon-div {
+  width: 50px;
 }

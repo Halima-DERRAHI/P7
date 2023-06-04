@@ -21,6 +21,9 @@ async function init() {
 
 	const { recipes } = await getRecipes();
 	displayRecipes(recipes);
+	createIngredientsFilter();
+	createAppareilsFilter();
+	createUstansilesFilter();
 }
 
 window.onload = function()

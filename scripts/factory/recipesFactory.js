@@ -1,6 +1,6 @@
 function recipesFactory(recipe) {
 
-	const { id, name, servings, ingredients, time, description, appliance, ustensils } = recipe;
+	const { id, image, name, servings, ingredients, time, description, appliance, ustensils } = recipe;
 
 	function recipeCardDOM() {
         
@@ -8,6 +8,9 @@ function recipesFactory(recipe) {
 		recipeCard.classList.add("recipe-card");
 		const recipePicture = document.createElement("div");
 		recipePicture.classList.add("recipe-picture");
+		const recipePictureImg = document.createElement("img");
+		recipePictureImg.setAttribute("src" , `assets/images/photos/${image}`);
+		recipePicture.appendChild(recipePictureImg);
 		recipeCard.appendChild(recipePicture);
 
 		const recipeDescription = document.createElement("div");
