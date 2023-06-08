@@ -125,6 +125,7 @@ header {
   justify-self: flex-start;
   padding: 20px 0;
   margin-bottom: 50px;
+  position: relative;
 }
 .select {
   min-width: 170px;
@@ -145,6 +146,7 @@ header {
 .filter {
   display: flex;
   justify-content: space-around;
+  position: relative;
 }
 .filter-list {
   position: absolute;
@@ -153,16 +155,19 @@ header {
   height: auto;
   max-height: 275px;
   flex-wrap: wrap;
-  margin-top: 70px;
+  /*margin-top: 70px;*/
   padding: 0;
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
+  top: 65px;
+  padding-bottom: 10px;
 }
 .filter-items {
-  width: 30%;
+  width: 28%;
   cursor: pointer;
   list-style: none;
-  text-align: center;
+  /*text-align: center;*/
+  margin: 6px 17px;
 }
 .filter-items i {
   cursor: pointer;
@@ -193,6 +198,7 @@ header {
   width: 170px;
   height: auto;
   margin-right: 20px;
+  display: block;
 }
 .tags-items {
   border-radius: 5px;

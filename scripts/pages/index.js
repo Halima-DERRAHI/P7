@@ -8,6 +8,8 @@ async function getRecipes() {
 
 function displayRecipes(recipes) {
 	const reciepContainer = document.querySelector(".recipes-container");
+	reciepContainer.innerHTML = "";
+
 	for (let i = 0; i < recipes.length; i++) {
 		const recipe = recipes[i];
 		const recipeModel = recipesFactory(recipe);
@@ -16,14 +18,12 @@ function displayRecipes(recipes) {
 	}
 }
 
-
 async function init() {
 
 	const { recipes } = await getRecipes();
+	await createFilters(recipes);
+
 	displayRecipes(recipes);
-	createIngredientsFilter();
-	createAppareilsFilter();
-	createUstansilesFilter();
 }
 
 window.onload = function()
