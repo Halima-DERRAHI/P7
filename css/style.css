@@ -29,7 +29,7 @@ header {
   grid-template-columns: 1fr auto;
   align-items: center;
 }
-.input_search {
+#main_search {
   border: none;
   border-radius: 5px;
   text-overflow: ellipsis;
