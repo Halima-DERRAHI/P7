@@ -1,9 +1,9 @@
 async function getRecipes() {
 
 	const reponse = await fetch("data/recipes.json");
-	const recipes = await reponse.json();
+	const data = await reponse.json();
 
-	return recipes;
+	return data.recipes;
 }
 
 function displayRecipes(recipes) {
@@ -18,15 +18,15 @@ function displayRecipes(recipes) {
 	}
 }
 
+let initialRecipes = [];
+
 async function init() {
 
-	const { recipes } = await getRecipes();
-	await createFilters(recipes);
-
-	displayRecipes(recipes);
+	initialRecipes = await getRecipes();
+	filterRecipes();
 }
 
-window.onload = function()
+window.onload = async function()
 {
-	init();
+	await init();
 };

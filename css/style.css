@@ -162,14 +162,18 @@ header {
   top: 65px;
   padding-bottom: 10px;
 }
-.filter-items {
+.ingredient-items,
+.appareil-items,
+.ustensile-items{
   width: 28%;
   cursor: pointer;
   list-style: none;
   /*text-align: center;*/
   margin: 6px 17px;
 }
-.filter-items i {
+.ingredient-items,
+.appareil-items,
+.ustensile-items i {
   cursor: pointer;
 }
 
