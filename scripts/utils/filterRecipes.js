@@ -14,7 +14,7 @@ function filterRecipes() {
 
 	let recipes = [...initialRecipes];
 
-	// filtrer 'recipes' par le champ de chercher (s'il contient 3 caractères ou plus)
+	// filtrer 'recipes' par le champ de recherche (s'il contient 3 caractères ou plus)
 
 	if (mainSearch.value.length >= 3 ) {
 		recipes = searchRecipe(recipes);
@@ -42,7 +42,7 @@ function filterRecipes() {
 	for ( let i = 0; i < recipes.length; i++ ) {
 		const recipe = recipes[i];
 
-		// Boucle pour les ingrédients
+		// Liste des ingrédients
 		for (let j = 0; j < recipe.ingredients.length; j++) {
 			const ingredient = recipe.ingredients[j].ingredient;
 		
@@ -69,7 +69,7 @@ function filterRecipes() {
 			}
 		}
 		
-		// Vérification des appareils
+		// Liste des appareils
 		let applianceExists = false;
 		for (let j = 0; j < applianceArray.length; j++) {
 			if (applianceArray[j].toLowerCase() === recipe.appliance.toLowerCase()) {
@@ -93,7 +93,7 @@ function filterRecipes() {
 		}
 
 		
-		// Boucle pour les ustensiles
+		// Liste des ustensiles
 		for (let j = 0; j < recipe.ustensils.length; j++) {
 			const ustensil = recipe.ustensils[j];
 		
@@ -122,6 +122,8 @@ function filterRecipes() {
   
 	}
 
+	// Mise à jour des listes des filtres selon les champs de recherche
+
 	const ingredientInput = document.getElementById("ingredients-input");
 	if (ingredientInput !== null && ingredientInput.value.length >= 3) {
 		ingredientsArray = searchIngredientItem(ingredientsArray, ingredientInput);
@@ -143,24 +145,16 @@ function filterRecipes() {
 	createAppliancesFilter(applianceArray, applianceTags, recipes);
 	createUstensilsFilter(ustensilsArray, ustensilTags, recipes);
 
+	// Affichage des recettes
+
 	displayRecipes(recipes);
 }
 
-// Rechercher selon la barre de recherche
+// Gestion des evenements du champ de recherche
 
-mainSearch.addEventListener("input", function() {
-	filterRecipes();
-});
-
-// Gestion des evenements filtres
-
-function closeOtherFilters(filterElement) {
-	const filterElements = document.querySelectorAll(".filter");
-	for (let i = 0; i < filterElements.length; i++) {
-		const filter = filterElements[i];
-		const arrowUp = filter.querySelector(".fa-angle-up");
-		if (filter !== filterElement && arrowUp && filter.classList.contains("active")) {
-			arrowUp.click();
-		}
+mainSearch.addEventListener("keyup", function() {
+	
+	if (mainSearch.value.length >= 3 ) {
+		filterRecipes();
 	}
-}
+});

@@ -41,6 +41,9 @@ function searchRecipe(recipes) {
 
 	return filterRecipes;
 }
+
+// Recherche selon les ingrédients
+
 function filterIngredients(recipes, ingredients) {
 	const filteredRecipes = [];
 	
@@ -74,6 +77,7 @@ function filterIngredients(recipes, ingredients) {
 
 	return filteredRecipes;
 }
+
 function searchIngredientItem(ingredientsArray, ingredientInput) {
 
 	const inputValue = ingredientInput.value.toLowerCase();
@@ -89,6 +93,9 @@ function searchIngredientItem(ingredientsArray, ingredientInput) {
   
 	return filteredIngredients;
 }
+
+// Recherche selon les appareils
+
 function filterAppliances(recipes, appliance) {
 
 	const filteredRecipes = [];
@@ -115,6 +122,7 @@ function filterAppliances(recipes, appliance) {
 	
 	return filteredRecipes;
 }
+
 function searchApplianceItem(applianceArray, applianceInput) {
 
 	const inputValue = applianceInput.value.toLowerCase();
@@ -130,6 +138,9 @@ function searchApplianceItem(applianceArray, applianceInput) {
   
 	return filteredAppliance;
 }
+
+// Recherche selon les ustensiles
+
 function filterUstensils(recipes, ustensiles) {
 	const filteredRecipes = [];
   
@@ -168,6 +179,7 @@ function filterUstensils(recipes, ustensiles) {
   
 	return filteredRecipes;
 }
+
 function searchUstensilItem(ustensilsArray, ustensilsInput) {
 
 	const inputValue = ustensilsInput.value.toLowerCase();

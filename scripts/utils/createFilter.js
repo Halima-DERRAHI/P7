@@ -1,3 +1,5 @@
+// Création du filtre Ingrédients
+
 function createIngredientsFilter(ingredientsArray, ingredientTags) {
 
 	const ingredientInput = document.getElementById("ingredients-input");
@@ -22,9 +24,10 @@ function createIngredientsFilter(ingredientsArray, ingredientTags) {
 		input.className = "search-input";
 		filterElement.appendChild(input);
 
-		input.addEventListener("input",function (e) {
+		// Gestion des evenements du champ de recherche du filtre
+
+		input.addEventListener("input",function () {
 			if (input.value.length >= 3) {
-				e.stopPropagation();
 				filterRecipes();
 			}
 		});
@@ -48,9 +51,10 @@ function createIngredientsFilter(ingredientsArray, ingredientTags) {
 		const listClass = "filter-ingredients_list";
 		filterList.style.display = "none";
 		filterList.className = listClass + " filter-list";
-		
 		filterElement.appendChild(filterList);
 	
+		// Création de la liste du filtre
+
 		for (let i = 0; i < ingredientsArray.length; i++) {
 			const name = ingredientsArray[i];
 			const item = createIngredientItem(name, ingredientTags, arrowUp);
@@ -80,13 +84,15 @@ function createIngredientsFilter(ingredientsArray, ingredientTags) {
 
 	} else {
 
-		ingredientInput.addEventListener("keyup",function (e) {
+		// Mise à jour des recettes filtrés
 
+		ingredientInput.addEventListener("keyup",function () {
 			if (ingredientInput.value.length >= 3 || ingredientInput.value.length > 0) {
-				e.stopPropagation();
 				filterRecipes();
 			}
 		});
+
+		// Mise à jour des elements de la liste des Ingrédients
 
 		const filteredList = document.querySelector(".filter-ingredients_list");
 		const arrowUp = document.querySelector(".fa-angle-up.ingredients");
@@ -104,6 +110,8 @@ function createIngredientsFilter(ingredientsArray, ingredientTags) {
 	}
 }
 
+// Création des elements de la liste du filtre Ingrédient
+
 function createIngredientItem(name, ingredientArray, arrowUp) {
 
 	const ingredientInput = document.getElementById("ingredients-input");
@@ -111,7 +119,9 @@ function createIngredientItem(name, ingredientArray, arrowUp) {
 	item.className = "ingredient-items";
 	item.textContent = name;
   
-	function clickHandler() {
+	// Gestion du click de l'element
+
+	function itemClick() {
 		let isNameIncluded = false;
 		for (let i = 0; i < ingredientArray.length; i++) {
 			if (ingredientArray[i] === name) {
@@ -131,10 +141,12 @@ function createIngredientItem(name, ingredientArray, arrowUp) {
 		}
 	}
   
-	item.addEventListener("click", clickHandler);
+	item.addEventListener("click", itemClick);
   
 	return item;
 }
+
+// Création du filtre Appareils
 
 function createAppliancesFilter(applianceArray, applianceTags) {
 
@@ -235,6 +247,8 @@ function createAppliancesFilter(applianceArray, applianceTags) {
 	}
 }
 
+// Création des elements de la liste du filtre Appareils
+
 function createAppareilItem(name, appareilArray, arrowUp) {
 
 	const applianceInput = document.getElementById("appareils-input");
@@ -242,7 +256,7 @@ function createAppareilItem(name, appareilArray, arrowUp) {
 	item.className = "appareil-items";
 	item.textContent = name;
   
-	function clickHandler() {
+	function itemClick() {
 		let isNameIncluded = false;
 		for (let i = 0; i < appareilArray.length; i++) {
 			if (appareilArray[i] === name) {
@@ -262,10 +276,12 @@ function createAppareilItem(name, appareilArray, arrowUp) {
 		}
 	}
   
-	item.addEventListener("click", clickHandler);
+	item.addEventListener("click", itemClick);
   
 	return item;
 }
+
+// Création du filtre Ustensiles
 
 function createUstensilsFilter(ustensilsArray, ustensilTags) {
 
@@ -363,6 +379,8 @@ function createUstensilsFilter(ustensilsArray, ustensilTags) {
 	}
 }
 
+// Création des elements de la liste du filtre Ustensiles
+
 function createUstensileItem(name, ustensileArray, arrowUp) {
 
 	const ustensilInput = document.getElementById("ustensiles-input");
@@ -370,7 +388,7 @@ function createUstensileItem(name, ustensileArray, arrowUp) {
 	item.className = "ustensile-items";
 	item.textContent = name;
   
-	function clickHandler() {
+	function itemClick() {
 		let isNameIncluded = false;
 		for (let i = 0; i < ustensileArray.length; i++) {
 			if (ustensileArray[i] === name) {
@@ -390,7 +408,7 @@ function createUstensileItem(name, ustensileArray, arrowUp) {
 		}
 	}
 
-	item.addEventListener("click", clickHandler);
+	item.addEventListener("click", itemClick);
 
 	return item;
 }
@@ -435,6 +453,19 @@ function removetag(array, name) {
 		if (array[i] === name) {
 			array.splice(i, 1);
 			break;
+		}
+	}
+}
+
+// Gestion des evenements filtres
+
+function closeOtherFilters(filterElement) {
+	const filterElements = document.querySelectorAll(".filter");
+	for (let i = 0; i < filterElements.length; i++) {
+		const filter = filterElements[i];
+		const arrowUp = filter.querySelector(".fa-angle-up");
+		if (filter !== filterElement && arrowUp && filter.classList.contains("active")) {
+			arrowUp.click();
 		}
 	}
 }
