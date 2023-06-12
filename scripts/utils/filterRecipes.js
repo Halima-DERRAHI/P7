@@ -24,6 +24,9 @@ function filterRecipes() {
 			const recherche = mainSearch.value;
 			errorMessage.textContent = `« Aucune recette ne contient "${recherche}". 
 					Vous pouvez chercher « tarte aux pommes », « poisson », etc.`;
+		} else {
+			recipes = searchRecipe(recipes);
+			errorMessage.textContent = "";
 		}		
 	}
 
