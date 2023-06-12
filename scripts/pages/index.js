@@ -7,14 +7,14 @@ async function getRecipes() {
 }
 
 function displayRecipes(recipes) {
-	const reciepContainer = document.querySelector(".recipes-container");
-	reciepContainer.innerHTML = "";
+	const recipeContainer = document.querySelector(".recipes-container");
+	recipeContainer.innerHTML = "";
 
 	for (let i = 0; i < recipes.length; i++) {
 		const recipe = recipes[i];
 		const recipeModel = recipesFactory(recipe);
 		const recipeCardDOM = recipeModel.recipeCardDOM();
-		reciepContainer.appendChild(recipeCardDOM);
+		recipeContainer.appendChild(recipeCardDOM);
 	}
 }
 

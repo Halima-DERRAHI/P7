@@ -9,6 +9,7 @@ let applianceTags = [];
 let ustensilTags = [];
 
 const mainSearch = document.getElementById("main_search");
+const errorMessage = document.querySelector(".error-message");
 
 function filterRecipes() {
 
@@ -18,6 +19,12 @@ function filterRecipes() {
 
 	if (mainSearch.value.length >= 3 ) {
 		recipes = searchRecipe(recipes);
+
+		if (recipes.length === 0) {
+			const recherche = mainSearch.value;
+			errorMessage.textContent = `« Aucune recette ne contient "${recherche}". 
+					Vous pouvez chercher « tarte aux pommes », « poisson », etc.`;
+		}		
 	}
 
 	// filtrer 'recipes' par les tags éventuels (tags of ingredients, devices and ustensils)
@@ -148,6 +155,7 @@ function filterRecipes() {
 	// Affichage des recettes
 
 	displayRecipes(recipes);
+
 }
 
 // Gestion des evenements du champ de recherche
