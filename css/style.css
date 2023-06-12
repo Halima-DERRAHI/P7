@@ -198,6 +198,11 @@ header {
 .tags{
   display: flex;
 }
+.ingredients-tags_container,
+.appareils-tags_container,
+.ustensiles-tags_container {
+  width: 190px;
+}
 .tags-container {
   width: 170px;
   height: auto;

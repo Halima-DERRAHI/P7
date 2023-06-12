@@ -180,6 +180,7 @@ function searchUstensilItem(ustensilsArray, ustensilsInput) {
 			filteredUstensil.push(item);
 		}
 	}
-  
+	console.log(filteredUstensil);
 	return filteredUstensil;
 }
+  

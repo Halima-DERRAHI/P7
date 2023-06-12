@@ -132,7 +132,7 @@ function filterRecipes() {
 		applianceArray = searchApplianceItem(applianceArray, applianceInput);
 	}
 
-	const ustensileInput = document.getElementById("appareils-input");
+	const ustensileInput = document.getElementById("ustensiles-input");
 	if (ustensileInput !== null && ustensileInput.value.length >= 3) {
 		ustensilsArray = searchUstensilItem(ustensilsArray, ustensileInput);
 	}

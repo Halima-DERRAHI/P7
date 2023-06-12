@@ -1,6 +1,6 @@
 function recipesFactory(recipe) {
 
-	const { id, image, name, servings, ingredients, time, description, appliance, ustensils } = recipe;
+	const { image, name, ingredients, time, description } = recipe;
 
 	function recipeCardDOM() {
         

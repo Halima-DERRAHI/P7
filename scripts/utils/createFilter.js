@@ -38,7 +38,7 @@ function createIngredientsFilter(ingredientsArray, ingredientTags) {
 		iconDiv.appendChild(arrowDown);
 	
 		const arrowUp = document.createElement("i");
-		arrowUp.className = "fa-solid fa-angle-up fa-lg";
+		arrowUp.className = "fa-solid fa-angle-up fa-lg ingredients";
 		arrowUp.style.cursor = "pointer";
 		arrowUp.style.display = "none";
 		iconDiv.appendChild(arrowUp);
@@ -79,19 +79,17 @@ function createIngredientsFilter(ingredientsArray, ingredientTags) {
 		});
 
 	} else {
-		
+
 		ingredientInput.addEventListener("keyup",function (e) {
 
-			if (ingredientInput.value.length >= 3) {
+			if (ingredientInput.value.length >= 3 || ingredientInput.value.length > 0) {
 				e.stopPropagation();
-				filterRecipes();
-			}else {
 				filterRecipes();
 			}
 		});
 
 		const filteredList = document.querySelector(".filter-ingredients_list");
-		const arrowUp = document.querySelector(".fa-angle-up");
+		const arrowUp = document.querySelector(".fa-angle-up.ingredients");
 		filteredList.innerHTML = "";
 
 		for (let i = 0; i < ingredientsArray.length; i++) {
@@ -141,81 +139,105 @@ function createIngredientItem(name, ingredientArray, arrowUp) {
 function createAppliancesFilter(applianceArray, applianceTags) {
 
 	const filterElement = document.querySelector(".filter-appareils");
-	filterElement.innerHTML = "";
+	const applianceInput = document.getElementById("appareils-input");
 
-	filterElement.classList.add("select");
-	filterElement.classList.add("filter");
-  
-	const title = document.createElement("span");
-	title.textContent = "Appareils";
-	filterElement.appendChild(title);
-  
-	const input = document.createElement("input");
-	const inputId = "appareils-input";
-	input.setAttribute("id", inputId);
-	input.style.display = "none";
-	input.setAttribute("placeholder", "Rechercher un appareil");
-	input.setAttribute("autocomplete", "off");
-	input.className = "search-input";
-	filterElement.appendChild(input);
-  
-	input.addEventListener("input",function (e) {
-		if (input.value.length >= 3) {
-			e.stopPropagation();
-			filterRecipes();
-		}
-	});
+	if (filterElement.textContent === "" || !applianceInput || applianceInput.value === "") {
+		filterElement.innerHTML = "";
+		filterElement.classList.add("select");
+		filterElement.classList.add("filter");
 
-	const iconDiv = document.createElement("div");
-	iconDiv.className = "icon-div";
-  
-	const arrowDown = document.createElement("i");
-	arrowDown.className = "fa-solid fa-angle-down fa-lg";
-	arrowDown.style.cursor = "pointer";
-	iconDiv.appendChild(arrowDown);
-  
-	const arrowUp = document.createElement("i");
-	arrowUp.className = "fa-solid fa-angle-up fa-lg";
-	arrowUp.style.cursor = "pointer";
-	arrowUp.style.display = "none";
-	iconDiv.appendChild(arrowUp);
-	filterElement.appendChild(iconDiv);
-  
-	const filterList = document.createElement("ul");
-	const listClass = "filter-appareils";
-	filterList.style.display = "none";
-	filterList.className = listClass + " filter-list";
-	filterElement.appendChild(filterList);
-  
-	for (let i = 0; i < applianceArray.length; i++) {
-		const name = applianceArray[i];
-		const item = createAppareilItem(name, applianceTags, arrowUp);
-		filterList.appendChild(item);
-	}
-    
-	// Gestion des evenements des  fleches
-  
-	arrowDown.addEventListener("click", function () {
-		title.style.display = "none";
-		input.style.display = "block";
-		arrowDown.style.display = "none";
-		arrowUp.style.display = "block";
-		filterElement.classList.add("active");
-		filterList.style.display = "flex";
-		closeOtherFilters(filterElement);
-	});
+		const title = document.createElement("span");
+		title.textContent = "Appareils";
+		filterElement.appendChild(title);
 
-	arrowUp.addEventListener("click", function () {
-		title.style.display = "block";
+		const input = document.createElement("input");
+		const inputId = "appareils-input";
+		input.setAttribute("id", inputId);
 		input.style.display = "none";
-		arrowDown.style.display = "block";
+		input.setAttribute("placeholder", "Rechercher un appareil");
+		input.setAttribute("autocomplete", "off");
+		input.className = "search-input";
+		filterElement.appendChild(input);
+
+		input.addEventListener("input", function (e) {
+			if (input.value.length >= 3) {
+				e.stopPropagation();
+				filterRecipes();
+			}
+		});
+
+		const iconDiv = document.createElement("div");
+		iconDiv.className = "icon-div";
+
+		const arrowDown = document.createElement("i");
+		arrowDown.className = "fa-solid fa-angle-down fa-lg";
+		arrowDown.style.cursor = "pointer";
+		iconDiv.appendChild(arrowDown);
+
+		const arrowUp = document.createElement("i");
+		arrowUp.className = "fa-solid fa-angle-up fa-lg appareils";
+		arrowUp.style.cursor = "pointer";
 		arrowUp.style.display = "none";
-		filterElement.classList.remove("active");
+		iconDiv.appendChild(arrowUp);
+		filterElement.appendChild(iconDiv);
+
+		const filterList = document.createElement("ul");
+		const listClass = "filter-appareils_list";
 		filterList.style.display = "none";
-	});
+		filterList.className = listClass + " filter-list";
+		filterElement.appendChild(filterList);
+
+		for (let i = 0; i < applianceArray.length; i++) {
+			const name = applianceArray[i];
+			const item = createAppareilItem(name, applianceTags, arrowUp);
+			filterList.appendChild(item);
+		}
+
+		arrowDown.addEventListener("click", function () {
+			title.style.display = "none";
+			input.style.display = "block";
+			arrowDown.style.display = "none";
+			arrowUp.style.display = "block";
+			filterElement.classList.add("active");
+			filterList.style.display = "flex";
+			closeOtherFilters(filterElement);
+		});
+
+		arrowUp.addEventListener("click", function () {
+			title.style.display = "block";
+			input.style.display = "none";
+			arrowDown.style.display = "block";
+			arrowUp.style.display = "none";
+			filterElement.classList.remove("active");
+			filterList.style.display = "none";
+		});
+	} else {
+		applianceInput.addEventListener("keyup", function (e) {
+
+			if (applianceInput.value.length >= 3 || applianceInput.value.length > 0 ) {
+				e.stopPropagation();
+				filterRecipes();
+			}
+		});
+
+		const filteredList = document.querySelector(".filter-appareils_list");
+		const arrowUp = document.querySelector(".fa-angle-up.appareils");
+		filteredList.innerHTML = "";
+		console.log(arrowUp);
+
+		for (let i = 0; i < applianceArray.length; i++) {
+			const name = applianceArray[i];
+			const item = createAppareilItem(name, applianceTags, arrowUp);
+			filteredList.appendChild(item);
+		}
+
+		filterElement.appendChild(filteredList);
+	}
 }
 
 function createAppareilItem(name, appareilArray, arrowUp) {
+
+	const applianceInput = document.getElementById("appareils-input");
 	const item = document.createElement("li");
 	item.className = "appareil-items";
 	item.textContent = name;
@@ -230,8 +252,13 @@ function createAppareilItem(name, appareilArray, arrowUp) {
 		}
   
 		if (!isNameIncluded) {
-			createTag(name, "Appareils", applianceTags);
 			arrowUp.click();
+			createTag(name, "Appareils", applianceTags);
+
+			if (applianceInput.value !== "") {
+				applianceInput.value = "";
+				filterRecipes();
+			}
 		}
 	}
   
@@ -241,85 +268,104 @@ function createAppareilItem(name, appareilArray, arrowUp) {
 }
 
 function createUstensilsFilter(ustensilsArray, ustensilTags) {
-  
+
 	const filterElement = document.querySelector(".filter-ustensiles");
-	filterElement.innerHTML = "";
+	const ustensilInput = document.getElementById("ustensiles-input");
 
-	filterElement.classList.add("select");
-	filterElement.classList.add("filter");
-  
-	const title = document.createElement("span");
-	title.textContent =  "Ustensiles";
-	filterElement.appendChild(title);
-  
-	const input = document.createElement("input");
-	const inputId = "ustensiles-input";
-	input.setAttribute("id", inputId);
-	input.style.display = "none";
-	input.setAttribute("placeholder", "Rechercher un ustensile");
-	input.setAttribute("autocomplete", "off");
-	input.className = "search-input";
-	filterElement.appendChild(input);
-  
-	input.addEventListener("input",function (e) {
-		if (input.value.length >= 3) {
-			e.stopPropagation();
-			filterRecipes();
-		}
-	});
+	if (filterElement.textContent === "" || !ustensilInput || ustensilInput.value === "") {
+		filterElement.innerHTML = "";
+		filterElement.classList.add("select");
+		filterElement.classList.add("filter");
 
-	const iconDiv = document.createElement("div");
-	iconDiv.className = "icon-div";
-  
-	const arrowDown = document.createElement("i");
-	arrowDown.className = "fa-solid fa-angle-down fa-lg";
-	arrowDown.style.cursor = "pointer";
-	iconDiv.appendChild(arrowDown);
-  
-	const arrowUp = document.createElement("i");
-	arrowUp.className = "fa-solid fa-angle-up fa-lg";
-	arrowUp.style.cursor = "pointer";
-	arrowUp.style.display = "none";
-	iconDiv.appendChild(arrowUp);
-	filterElement.appendChild(iconDiv);
-  
-	const filterList = document.createElement("ul");
-	const listClass = "filter-ustensiles_list";
-	filterList.style.display = "none";
-	filterList.className = listClass + " filter-list";
-	filterElement.appendChild(filterList);
+		const title = document.createElement("span");
+		title.textContent = "Ustensiles";
+		filterElement.appendChild(title);
 
-	filterList.innerHTML = "";
-
-	for (let i = 0; i < ustensilsArray.length; i++) {
-		const name = ustensilsArray[i];
-		const item = createUstensileItem(name, ustensilTags, arrowUp);
-		filterList.appendChild(item);
-	}
-    
-	// Gestion des evenements des  fleches
-  
-	arrowDown.addEventListener("click", function () {
-		title.style.display = "none";
-		input.style.display = "block";
-		arrowDown.style.display = "none";
-		arrowUp.style.display = "block";
-		filterElement.classList.add("active");
-		filterList.style.display = "flex";
-		closeOtherFilters(filterElement);
-	});
-
-	arrowUp.addEventListener("click", function () {
-		title.style.display = "block";
+		const input = document.createElement("input");
+		const inputId = "ustensiles-input";
+		input.setAttribute("id", inputId);
 		input.style.display = "none";
-		arrowDown.style.display = "block";
+		input.setAttribute("placeholder", "Rechercher un ustensile");
+		input.setAttribute("autocomplete", "off");
+		input.className = "search-input";
+		filterElement.appendChild(input);
+
+		input.addEventListener("input", function () {
+			if (input.value.length >= 3) {
+				//e.stopPropagation();
+				filterRecipes();
+			}
+		});
+
+		const iconDiv = document.createElement("div");
+		iconDiv.className = "icon-div";
+
+		const arrowDown = document.createElement("i");
+		arrowDown.className = "fa-solid fa-angle-down fa-lg";
+		arrowDown.style.cursor = "pointer";
+		iconDiv.appendChild(arrowDown);
+
+		const arrowUp = document.createElement("i");
+		arrowUp.className = "fa-solid fa-angle-up fa-lg ustensiles";
+		arrowUp.style.cursor = "pointer";
 		arrowUp.style.display = "none";
-		filterElement.classList.remove("active");
+		iconDiv.appendChild(arrowUp);
+		filterElement.appendChild(iconDiv);
+
+		const filterList = document.createElement("ul");
+		const listClass = "filter-ustensiles_list";
 		filterList.style.display = "none";
-	});
+		filterList.className = listClass + " filter-list";
+		filterElement.appendChild(filterList);
+
+		for (let i = 0; i < ustensilsArray.length; i++) {
+			const name = ustensilsArray[i];
+			const item = createUstensileItem(name, ustensilTags, arrowUp);
+			filterList.appendChild(item);
+		}
+
+		arrowDown.addEventListener("click", function () {
+			title.style.display = "none";
+			input.style.display = "block";
+			arrowDown.style.display = "none";
+			arrowUp.style.display = "block";
+			filterElement.classList.add("active");
+			filterList.style.display = "flex";
+			closeOtherFilters(filterElement);
+		});
+
+		arrowUp.addEventListener("click", function () {
+			title.style.display = "block";
+			input.style.display = "none";
+			arrowDown.style.display = "block";
+			arrowUp.style.display = "none";
+			filterElement.classList.remove("active");
+			filterList.style.display = "none";
+		});
+	} else {
+		ustensilInput.addEventListener("keyup", function (e) {
+			if (ustensilInput.value.length >= 3 || ustensilInput.value.length > 0) {
+				e.stopPropagation();
+				filterRecipes();
+			}
+		});
+
+		const filteredList = document.querySelector(".filter-ustensiles_list");
+		const arrowUp = document.querySelector(".fa-angle-up.ustensiles");
+		filteredList.innerHTML = "";
+
+		for (let i = 0; i < ustensilsArray.length; i++) {
+			const name = ustensilsArray[i];
+			const item = createUstensileItem(name, ustensilTags, arrowUp);
+			filteredList.appendChild(item);
+		}
+		filterElement.appendChild(filteredList);
+	}
 }
 
 function createUstensileItem(name, ustensileArray, arrowUp) {
+
+	const ustensilInput = document.getElementById("ustensiles-input");
 	const item = document.createElement("li");
 	item.className = "ustensile-items";
 	item.textContent = name;
@@ -334,8 +380,13 @@ function createUstensileItem(name, ustensileArray, arrowUp) {
 		}
 
 		if (!isNameIncluded) {
-			createTag(name, "Ustensiles", ustensilTags );
 			arrowUp.click();
+			createTag(name, "Ustensiles", ustensilTags );
+
+			if (ustensilInput.value !== "") {
+				ustensilInput.value = "";
+				filterRecipes();
+			}
 		}
 	}
 
