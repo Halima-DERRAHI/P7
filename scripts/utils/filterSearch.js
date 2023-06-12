@@ -19,22 +19,15 @@ function searchRecipe(recipes) {
 			}
 		}
 
-		let recipeApplianceExists = false;
-		for ( let k = 0; k < recipe.appliance.length ; k++ ) {
+		let recipeDescriptionExists = false;
+		for ( let k = 0; k < recipe.description.length ; k++ ) {
 
-			if ( recipe.appliance[k].toLowerCase().indexOf(inputValue) !== -1 ) {
-				recipeApplianceExists = true;
+			if ( recipe.description[k].toLowerCase().indexOf(inputValue) !== -1 ) {
+				recipeDescriptionExists = true;
 			}
 		}
 
-		let recipeUstensilsExixts = false;
-		for ( let m = 0; m < recipe.ustensils.length; m++ ) {
-			if ( recipe.ustensils[m].toLowerCase().indexOf(inputValue) !== -1 ){
-				recipeUstensilsExixts = true;
-			}
-		}
-		
-		if ( titleExists || recipeIngredientExists || recipeApplianceExists || recipeUstensilsExixts ) {
+		if ( titleExists || recipeIngredientExists || recipeDescriptionExists ) {
 			filterRecipes.push(recipe);
 		}
 	}

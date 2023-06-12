@@ -153,8 +153,5 @@ function filterRecipes() {
 // Gestion des evenements du champ de recherche
 
 mainSearch.addEventListener("keyup", function() {
-	
-	if (mainSearch.value.length >= 3 ) {
-		filterRecipes();
-	}
+	filterRecipes();
 });
