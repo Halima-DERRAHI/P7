@@ -25,9 +25,11 @@ function filterRecipes() {
 			errorMessage.textContent = `« Aucune recette ne contient "${recherche}". 
 					Vous pouvez chercher « tarte aux pommes », « poisson », etc.`;
 		} else {
-			recipes = searchRecipe(recipes);
 			errorMessage.textContent = "";
+			recipes = searchRecipe(recipes);
 		}		
+	} else {
+		errorMessage.textContent = "";
 	}
 
 	// filtrer 'recipes' par les tags éventuels (tags of ingredients, devices and ustensils)
