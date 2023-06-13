@@ -25,9 +25,10 @@ function searchRecipe(recipes) {
 
 function filterIngredients(recipes, ingredients) {
 
-	const filteredRecipes = recipes.filter((recipe) => {
+	const filteredRecipes = recipes.filter(recipe => {
 		return ingredients.every(ingredient => {
-			return recipe.ingredients.ingredient.includes(ingredient);
+			return recipe.ingredients.some(recipeIngredient => 
+				recipeIngredient.ingredient.includes(ingredient));
 		});
 	});
 
