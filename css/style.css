@@ -82,7 +82,7 @@ header {
 .recipe-title {
   font-size: 18px;
   align-self: flex-start;
-  padding-top: 10px;
+  padding-top: 11px;
   font-weight: 400;
   font-size: 18px;
 }
@@ -92,7 +92,7 @@ header {
   font-weight: 700;
   font-size: 18px;
   padding-top: 10px;
-  /*align-items: center;*/
+  align-items: baseline;
 }
 .recipe-timing{
   padding-left: 6px;
@@ -243,4 +243,9 @@ header {
 }
 .select.active .icon-div {
   width: 50px;
+}
+
+.error-message {
+  text-align: center;
+  color: grey;
 }

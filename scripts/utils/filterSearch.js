@@ -3,34 +3,20 @@ function searchRecipe(recipes) {
 	const filterRecipes = [];
 	const inputValue = mainSearch.value.toLowerCase();
 	
-	for (let i = 0; i < recipes.length; i++ ) {
-		const recipe = recipes[i];
+	recipes.forEach(recipe => {
 
-		let titleExists = false;
-		if ( recipe.name.toLowerCase().indexOf(inputValue) !== -1 ) {
-			titleExists = true;
-		}
+		const titleExists = recipe.name.toLowerCase().includes(inputValue);
 
-		let recipeIngredientExists = false;
-		for ( let j = 0; j < recipe.ingredients.length ; j++ ) {
-
-			if ( recipe.ingredients[j].ingredient.toLowerCase().indexOf(inputValue) !== -1 ) {
-				recipeIngredientExists = true;
-			}
-		}
-
-		let recipeDescriptionExists = false;
-		for ( let k = 0; k < recipe.description.length ; k++ ) {
-
-			if ( recipe.description[k].toLowerCase().indexOf(inputValue) !== -1 ) {
-				recipeDescriptionExists = true;
-			}
-		}
+		const recipeIngredientExists = recipe.ingredients.some((ingredient) =>
+			ingredient.ingredient.toLowerCase().includes(inputValue)
+		);
+			
+		const recipeDescriptionExists = recipe.description.toLowerCase().includes(inputValue);
 
 		if ( titleExists || recipeIngredientExists || recipeDescriptionExists ) {
 			filterRecipes.push(recipe);
 		}
-	}
+	}); 
 
 	return filterRecipes;
 }
@@ -38,35 +24,14 @@ function searchRecipe(recipes) {
 // Recherche selon les ingrédients
 
 function filterIngredients(recipes, ingredients) {
-	const filteredRecipes = [];
 	
-	for (let i = 0; i < recipes.length; i++) {
-		const recipe = recipes[i];
-		let ingredientMatch = true;
-
-		for (let j = 0; j < ingredients.length; j++) {
-			const ingredient = ingredients[j];
-			let ingredientFound = false;
-
-			for (let k = 0; k < recipe.ingredients.length; k++) {
-				const recipeIngredient = recipe.ingredients[k].ingredient;
-
-				if (recipeIngredient === ingredient) {
-					ingredientFound = true;
-					break;
-				}
-			}
-
-			if (!ingredientFound) {
-				ingredientMatch = false;
-				break;
-			}
-		}
-
-		if (ingredientMatch) {
-			filteredRecipes.push(recipe);
-		}
-	}
+	const filteredRecipes = recipes.filter((recipe) => {
+		return ingredients.every(ingredient => {
+			return recipe.ingredients.some(recipeIngredient => {
+				return recipeIngredient.ingredient === ingredient;
+			});
+		});
+	});
 
 	return filteredRecipes;
 }
@@ -74,16 +39,7 @@ function filterIngredients(recipes, ingredients) {
 function searchIngredientItem(ingredientsArray, ingredientInput) {
 
 	const inputValue = ingredientInput.value.toLowerCase();
-	const filteredIngredients = [];
-  
-	for (let i = 0; i < ingredientsArray.length; i++) {
-		const item = ingredientsArray[i];
-	
-		if (item.toLowerCase().indexOf(inputValue) !== -1) {
-			filteredIngredients.push(item);
-		}
-	}
-  
+	const filteredIngredients = ingredientsArray.filter(item => item.toLowerCase().includes(inputValue));
 	return filteredIngredients;
 }
 
