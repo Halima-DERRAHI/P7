@@ -24,12 +24,10 @@ function searchRecipe(recipes) {
 // Recherche selon les ingrédients
 
 function filterIngredients(recipes, ingredients) {
-	
+
 	const filteredRecipes = recipes.filter((recipe) => {
 		return ingredients.every(ingredient => {
-			return recipe.ingredients.some(recipeIngredient => {
-				return recipeIngredient.ingredient === ingredient;
-			});
+			return recipe.ingredients.ingredient.includes(ingredient);
 		});
 	});
 
@@ -45,13 +43,11 @@ function searchIngredientItem(ingredientsArray, ingredientInput) {
 
 // Recherche selon les appareils
 
-function filterAppliances(recipes, appliances) {
+function filterAppliances(recipes, appliance) {
 
 	const filteredRecipes = recipes.filter((recipe) => {
-		return appliances.every(appliance => {
-			return recipe.appliance.some(recipeAppliance => {
-				return recipeAppliance.appliance === appliance;
-			});
+		return appliance.every(appliance => {
+			return recipe.appliance.includes(appliance);
 		});
 	});
 
@@ -71,9 +67,7 @@ function filterUstensils(recipes, ustensils) {
 	
 	const filteredRecipes = recipes.filter((recipe) => {
 		return ustensils.every(ustensil => {
-			return recipe.appliance.some(recipeUstensil => {
-				return recipeUstensil.ustensil === ustensil;
-			});
+			return recipe.ustensils.includes(ustensil);
 		});
 	});
 
