@@ -10,12 +10,11 @@ function displayRecipes(recipes) {
 	const recipeContainer = document.querySelector(".recipes-container");
 	recipeContainer.innerHTML = "";
 
-	for (let i = 0; i < recipes.length; i++) {
-		const recipe = recipes[i];
+	recipes.forEach(recipe => {
 		const recipeModel = recipesFactory(recipe);
 		const recipeCardDOM = recipeModel.recipeCardDOM();
 		recipeContainer.appendChild(recipeCardDOM);
-	}
+	});
 }
 
 let initialRecipes = [];
