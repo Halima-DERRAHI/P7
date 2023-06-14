@@ -5,7 +5,7 @@ function createIngredientsFilter(ingredientsArray, ingredientTags) {
 	const ingredientInput = document.getElementById("ingredients-input");
 	const filterElement = document.querySelector(".filter-ingredients");
 
-	if  (filterElement.textContent === "" || (ingredientInput.value == "")) {
+	if  (filterElement.textContent === "") {
 
 		filterElement.innerHTML = "";
 		filterElement.classList.add("select");
@@ -149,7 +149,7 @@ function createAppliancesFilter(applianceArray, applianceTags) {
 	const filterElement = document.querySelector(".filter-appareils");
 	const applianceInput = document.getElementById("appareils-input");
 
-	if (filterElement.textContent === "" || !applianceInput || applianceInput.value === "") {
+	if (filterElement.textContent === "") {
 		filterElement.innerHTML = "";
 		filterElement.classList.add("select");
 		filterElement.classList.add("filter");
@@ -232,7 +232,6 @@ function createAppliancesFilter(applianceArray, applianceTags) {
 		const filteredList = document.querySelector(".filter-appareils_list");
 		const arrowUp = document.querySelector(".fa-angle-up.appareils");
 		filteredList.innerHTML = "";
-		console.log(arrowUp);
 
 		for (let i = 0; i < applianceArray.length; i++) {
 			const name = applianceArray[i];
@@ -279,7 +278,7 @@ function createUstensilsFilter(ustensilsArray, ustensilTags) {
 	const filterElement = document.querySelector(".filter-ustensiles");
 	const ustensilInput = document.getElementById("ustensiles-input");
 
-	if (filterElement.textContent === "" || !ustensilInput || ustensilInput.value === "") {
+	if (filterElement.textContent === "" ) {
 		filterElement.innerHTML = "";
 		filterElement.classList.add("select");
 		filterElement.classList.add("filter");
@@ -449,7 +448,8 @@ function closeOtherFilters(filterElement) {
 	for (let i = 0; i < filterElements.length; i++) {
 		const filter = filterElements[i];
 		const arrowUp = filter.querySelector(".fa-angle-up");
-		if (filter !== filterElement && filter.classList.contains("active")) {
+
+		if (filter !== filterElement && filter.classList.contains("active") && arrowUp) {
 			arrowUp.click();
 		}
 	}

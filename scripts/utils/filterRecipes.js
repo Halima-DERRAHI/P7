@@ -161,6 +161,7 @@ function filterRecipes() {
 
 	displayRecipes(recipes);
 
+	console.log("display recipes");
 }
 
 // Gestion des evenements du champ de recherche
