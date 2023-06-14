@@ -26,7 +26,7 @@ function createIngredientsFilter(ingredientsArray, ingredientTags) {
 
 		// Gestion des evenements du champ de recherche du filtre
 
-		input.addEventListener("input",function () {
+		input.addEventListener("keyup",function () {
 			if (input.value.length >= 3) {
 				filterRecipes();
 			}
@@ -167,7 +167,7 @@ function createAppliancesFilter(applianceArray, applianceTags) {
 		input.className = "search-input";
 		filterElement.appendChild(input);
 
-		input.addEventListener("input", function (e) {
+		input.addEventListener("keyup", function () {
 			if (input.value.length >= 3) {
 				filterRecipes();
 			}
@@ -296,7 +296,7 @@ function createUstensilsFilter(ustensilsArray, ustensilTags) {
 		input.className = "search-input";
 		filterElement.appendChild(input);
 
-		input.addEventListener("input", function () {
+		input.addEventListener("keyup", function () {
 			if (input.value.length >= 3) {
 				filterRecipes();
 			}
