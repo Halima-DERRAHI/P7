@@ -45,6 +45,23 @@ function filterRecipes() {
 		recipes = filterUstensils(recipes, ustensilTags);
 	}
 
+	// Mise à jour des listes des filtres selon les champs de recherche
+
+	const ingredientInput = document.getElementById("ingredients-input");
+	if (ingredientInput !== null && ingredientInput.value.length >= 3) {
+		ingredientsArray = searchIngredientItem(ingredientsArray, ingredientInput);
+	}
+
+	const applianceInput = document.getElementById("appareils-input");
+	if (applianceInput !== null && applianceInput.value.length >= 3) {
+		applianceArray = searchApplianceItem(applianceArray, applianceInput);
+	}
+
+	const ustensileInput = document.getElementById("ustensiles-input");
+	if (ustensileInput !== null && ustensileInput.value.length >= 3) {
+		ustensilsArray = searchUstensilItem(ustensilsArray, ustensileInput);
+	}
+
 	// extract ingredients, devices and ustensils from 'recipes'
 
 	let ingredientsArray = [];
@@ -131,24 +148,6 @@ function filterRecipes() {
 				}
 			}
 		}
-  
-	}
-
-	// Mise à jour des listes des filtres selon les champs de recherche
-
-	const ingredientInput = document.getElementById("ingredients-input");
-	if (ingredientInput !== null && ingredientInput.value.length >= 3) {
-		ingredientsArray = searchIngredientItem(ingredientsArray, ingredientInput);
-	}
-
-	const applianceInput = document.getElementById("appareils-input");
-	if (applianceInput !== null && applianceInput.value.length >= 3) {
-		applianceArray = searchApplianceItem(applianceArray, applianceInput);
-	}
-
-	const ustensileInput = document.getElementById("ustensiles-input");
-	if (ustensileInput !== null && ustensileInput.value.length >= 3) {
-		ustensilsArray = searchUstensilItem(ustensilsArray, ustensileInput);
 	}
 
 	// Création des filtres
