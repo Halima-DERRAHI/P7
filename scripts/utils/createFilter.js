@@ -444,11 +444,11 @@ function removetag(array, name) {
 
 function closeOtherFilters(filterElement) {
 	const filterElements = document.querySelectorAll(".filter");
-	for (let i = 0; i < filterElements.length; i++) {
-		const filter = filterElements[i];
+
+	filterElements.forEach(filter => {
 		const arrowUp = filter.querySelector(".fa-angle-up");
 		if (filter !== filterElement && filter.classList.contains("active") && arrowUp) {
 			arrowUp.click();
 		}
-	}
+	});
 }
