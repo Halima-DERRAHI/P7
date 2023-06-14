@@ -76,7 +76,7 @@ function createIngredientsFilter(ingredientsArray, ingredientTags) {
 		arrowUp.addEventListener("click", function () {
 			title.style.display = "block";
 			input.style.display = "none";
-			input.textContent = "";
+			input.value = "";
 			arrowDown.style.display = "block";
 			arrowUp.style.display = "none";
 			filterElement.classList.remove("active");
@@ -167,7 +167,7 @@ function createAppliancesFilter(applianceArray, applianceTags) {
 		input.className = "search-input";
 		filterElement.appendChild(input);
 
-		input.addEventListener("input", function () {
+		input.addEventListener("keyup", function () {
 			if (input.value.length >= 3) {
 				filterRecipes();
 			}
@@ -213,7 +213,7 @@ function createAppliancesFilter(applianceArray, applianceTags) {
 		arrowUp.addEventListener("click", function () {
 			title.style.display = "block";
 			input.style.display = "none";
-			input.textContent = "";
+			input.value = "";
 			arrowDown.style.display = "block";
 			arrowUp.style.display = "none";
 			filterElement.classList.remove("active");
@@ -341,7 +341,7 @@ function createUstensilsFilter(ustensilsArray, ustensilTags) {
 		arrowUp.addEventListener("click", function () {
 			title.style.display = "block";
 			input.style.display = "none";
-			input.textContent = "";
+			input.value = "";
 			arrowDown.style.display = "block";
 			arrowUp.style.display = "none";
 			filterElement.classList.remove("active");
