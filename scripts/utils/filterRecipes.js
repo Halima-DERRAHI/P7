@@ -167,4 +167,5 @@ function filterRecipes() {
 
 mainSearch.addEventListener("keyup", function() {
 	filterRecipes();
+	closeOtherFilters(mainSearch);
 });
