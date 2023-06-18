@@ -4,19 +4,19 @@ function searchRecipe(recipes) {
 	const inputValue = mainSearch.value.toLowerCase();
 	
 	recipes.forEach(recipe => {
-
 		const titleExists = recipe.name.toLowerCase().includes(inputValue);
 
-		const recipeIngredientExists = recipe.ingredients.some((ingredient) =>
+		const recipeIngredientExists = recipe.ingredients.filter(ingredient =>
 			ingredient.ingredient.toLowerCase().includes(inputValue)
-		);
-			
+		).length > 0;
+
 		const recipeDescriptionExists = recipe.description.toLowerCase().includes(inputValue);
 
-		if ( titleExists || recipeIngredientExists || recipeDescriptionExists ) {
+		if (titleExists || recipeIngredientExists || recipeDescriptionExists) {
 			filterRecipes.push(recipe);
 		}
-	}); 
+	});
+
 
 	return filterRecipes;
 }
@@ -25,14 +25,26 @@ function searchRecipe(recipes) {
 
 function filterIngredients(recipes, ingredients) {
 
-	const filteredRecipes = recipes.filter(recipe => {
-		return ingredients.every(ingredient => {
-			return recipe.ingredients.some(recipeIngredient => 
-				recipeIngredient.ingredient.includes(ingredient));
+	const filteredRecipes = [];
+
+	recipes.forEach(recipe => {
+		let ingredientMatch = true;
+
+		ingredients.forEach(ingredient => {
+			const ingredientFound = recipe.ingredients.map(recipeIngredient => recipeIngredient.ingredient).includes(ingredient);
+
+			if (!ingredientFound) {
+				ingredientMatch = false;
+			}
 		});
+
+		if (ingredientMatch) {
+			filteredRecipes.push(recipe);
+		}
 	});
 
 	return filteredRecipes;
+
 }
 
 function searchIngredientItem(ingredientsArray, ingredientInput) {
@@ -46,13 +58,16 @@ function searchIngredientItem(ingredientsArray, ingredientInput) {
 
 function filterAppliances(recipes, appliance) {
 
-	const filteredRecipes = recipes.filter((recipe) => {
-		return appliance.every(appliance => {
-			return recipe.appliance.includes(appliance);
-		});
+	const filteredRecipes = [];
+
+	recipes.forEach(recipe => {
+		if (appliance.length === 0 || appliance.includes(recipe.appliance)) {
+			filteredRecipes.push(recipe);
+		}
 	});
 
 	return filteredRecipes;
+
 }
 
 function searchApplianceItem(applianceArray, applianceInput) {
@@ -66,12 +81,19 @@ function searchApplianceItem(applianceArray, applianceInput) {
 
 function filterUstensils(recipes, ustensils) {
 	
-	const filteredRecipes = recipes.filter((recipe) => {
-		return ustensils.every(ustensil => {
-			return recipe.ustensils.includes(ustensil);
+	const filteredRecipes = [];
+  
+	recipes.forEach(recipe =>  {
+
+		ustensils.forEach( ustensil => {
+			const ustensilFound = recipe.ingredients.map(recipeUstensil => recipeUstensil.ustensil).includes(ustensil);
+
+			if (ustensils.length === 0 || ustensilFound) {
+				filteredRecipes.push(recipe);
+			}
 		});
 	});
-
+  
 	return filteredRecipes;
 }
 
@@ -79,6 +101,7 @@ function searchUstensilItem(ustensilsArray, ustensilsInput) {
 
 	const inputValue = ustensilsInput.value.toLowerCase();
 	const filteredUstensils = ustensilsArray.filter(item => item.toLowerCase().includes(inputValue));
+	
 	return filteredUstensils;
 }
   
