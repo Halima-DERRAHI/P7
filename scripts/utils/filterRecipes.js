@@ -17,7 +17,7 @@ function filterRecipes() {
 
 	// filtrer 'recipes' par le champ de recherche (s'il contient 3 caractères ou plus)
 
-	if (mainSearch.value.length >= 3 ) {
+	if (mainSearch.value.trim().length >= 3 ) {
 		recipes = searchRecipe(recipes);
 
 		if (recipes.length === 0) {
