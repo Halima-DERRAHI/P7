@@ -35,10 +35,6 @@ function searchRecipe(recipes) {
 		}
 	}
 
-	createIngredientsList(filterRecipes);
-	createAppliancesList(filterRecipes);
-	createUstensilsList(filterRecipes);
-
 	return filterRecipes;
 }
 
