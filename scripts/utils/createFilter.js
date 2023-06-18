@@ -307,7 +307,7 @@ function createUstensilsFilter(recipes) {
 	const filterElement = document.querySelector(".filter-ustensiles");
 
 	filterElement.innerHTML = "";
-	filterElement.className = "filter-ustensiles select filter"
+	filterElement.className = "filter-ustensiles select filter";
 
 	const title = document.createElement("span");
 	title.textContent = "Ustensiles";
@@ -498,6 +498,7 @@ function removetag(array, name) {
 
 function closeOtherFilters(filterElement) {
 	const filterElements = document.querySelectorAll(".filter");
+	
 	for (let i = 0; i < filterElements.length; i++) {
 		const filter = filterElements[i];
 		const arrowUp = filter.querySelector(".fa-angle-up");

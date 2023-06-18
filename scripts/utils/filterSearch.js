@@ -176,8 +176,6 @@ function filterUstensils(recipes, ustensiles) {
 			filteredRecipes.push(recipe);
 		}
 	}
-
-	createUstensilsList(filteredRecipes);
   
 	return filteredRecipes;
 }
