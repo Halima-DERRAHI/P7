@@ -66,7 +66,7 @@ function createIngredientsFilter(recipes) {
 	});
 }
 
-// Création des elements de la liste du filtre Ingrédient
+// Création de la liste du filtre Ingrédient
 
 function createIngredientsList(recipes) {
 
@@ -76,10 +76,10 @@ function createIngredientsList(recipes) {
 		recipe.ingredients.forEach(ingredientObj => {
 
 			const ingredient = ingredientObj.ingredient;
-			const ingredientExists = ingredientsArray.includes(ingredient.toLowerCase());
+			const ingredientExists = ingredientsArray.filter(existingIngredient => existingIngredient.toLowerCase() === ingredient.toLowerCase()).length > 0;
 	
 			if (!ingredientExists) {
-				const tagExists = ingredientTags.includes(ingredient.toLowerCase());
+				const tagExists = ingredientTags.filter(existingTag => existingTag.toLowerCase() === ingredient.toLowerCase()).length > 0;
 	
 				if (!tagExists) {
 					ingredientsArray.push(ingredient);
@@ -108,6 +108,8 @@ function createIngredientsList(recipes) {
 		createIngredientsList(recipes);
 	});
 }
+
+// Création des éléments de la liste du filtre Ingrédient
 
 function createIngredientItem(name, ingredientArray) {
 
@@ -195,23 +197,23 @@ function createAppliancesFilter(recipes) {
 	});
 }
 
-// Création des elements de la liste du filtre Appareils
+// Création de la liste du filtre Appareils
 
 function createAppliancesList(recipes) {
 	let appliancesArray = [];
 
-
 	recipes.forEach(recipe => {
-		const applianceExists = appliancesArray.includes(recipe.appliance.toLowerCase());
-	
+		const applianceExists = appliancesArray.filter(existingAppliance => existingAppliance.toLowerCase() === recipe.appliance.toLowerCase()).length > 0;
+
 		if (!applianceExists) {
-			const applianceTagExists = applianceTags.includes(recipe.appliance.toLowerCase());
+			const applianceTagExists = applianceTags.filter(existingTag => existingTag.toLowerCase() === recipe.appliance.toLowerCase()).length > 0;
 	
 			if (!applianceTagExists) {
 				appliancesArray.push(recipe.appliance);
 			}
 		}
 	});
+
 	
 
 	const appliancesList = document.querySelector(".filter-appareils_list");
@@ -233,6 +235,8 @@ function createAppliancesList(recipes) {
 	});
 }
 
+// Création des éléments de la liste du filtre Appareils
+
 function createAppareilItem(name, appareilArray) {
 
 	const item = document.createElement("li");
@@ -240,15 +244,14 @@ function createAppareilItem(name, appareilArray) {
 	item.textContent = name;
   
 	function itemClick() {
-		const isNameIncluded = appareilArray.includes(name);
 	
-		if (!isNameIncluded) {
+		if (!appareilArray.includes(name)) {
 			createTag(name, "Appareils", applianceTags);
 		}
 	}
 	
 	item.addEventListener("click", itemClick);
-  
+
 	return item;
 }
 
@@ -318,7 +321,7 @@ function createUstensilsFilter(recipes) {
 	});
 }
 
-// Création des elements de la liste du filtre Ustensiles
+// Création de la liste du filtre Ustensiles
 
 function createUstensilsList(recipes) {
 
@@ -326,10 +329,10 @@ function createUstensilsList(recipes) {
 
 	recipes.forEach(recipe => {
 		recipe.ustensils.forEach(ustensil => {
-			const ustensilExists = ustensilsArray.includes(ustensil.toLowerCase());
+			const ustensilExists = ustensilsArray.filter(existingUstensil => existingUstensil.toLowerCase() === ustensil.toLowerCase()).length > 0;
 	
 			if (!ustensilExists) {
-				const ustensilTagExists = ustensilTags.includes(ustensil.toLowerCase());
+				const ustensilTagExists = ustensilTags.filter(existingTag => existingTag.toLowerCase() === ustensil.toLowerCase()).length > 0;
 	
 				if (!ustensilTagExists) {
 					ustensilsArray.push(ustensil);
@@ -358,6 +361,8 @@ function createUstensilsList(recipes) {
 	});
 }
 
+// Création des éléments de la liste du filtre Ustensiles
+
 function createUstensileItem(name, ustensileArray) {
 
 	const item = document.createElement("li");
@@ -365,9 +370,8 @@ function createUstensileItem(name, ustensileArray) {
 	item.textContent = name;
   
 	function itemClick() {
-		const isNameIncluded = ustensileArray.includes(name);
 
-		if (!isNameIncluded) {
+		if (!ustensileArray.includes(name)) {
 			createTag(name, "Ustensiles", ustensilTags);
 		}
 	}
@@ -413,11 +417,9 @@ function createTag(name, filterName, taggedArray ) {
 
 function removetag(array, name) {
 
-	for (let i = 0; i < array.length; i++) {
-		if (array[i] === name) {
-			array.splice(i, 1);
-			break;
-		}
+	const index = array.indexOf(name);
+	if (index !== -1) {
+		array.splice(index, 1);
 	}
 }
 

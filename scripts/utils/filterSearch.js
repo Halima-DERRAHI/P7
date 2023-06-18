@@ -17,7 +17,6 @@ function searchRecipe(recipes) {
 		}
 	});
 
-
 	return filterRecipes;
 }
 
@@ -51,6 +50,7 @@ function searchIngredientItem(ingredientsArray, ingredientInput) {
 
 	const inputValue = ingredientInput.value.toLowerCase();
 	const filteredIngredients = ingredientsArray.filter(item => item.toLowerCase().includes(inputValue));
+	
 	return filteredIngredients;
 }
 
@@ -74,6 +74,7 @@ function searchApplianceItem(applianceArray, applianceInput) {
 
 	const inputValue = applianceInput.value.toLowerCase();
 	const filteredAppliances = applianceArray.filter(item => item.toLowerCase().includes(inputValue));
+	
 	return filteredAppliances;
 }
 
