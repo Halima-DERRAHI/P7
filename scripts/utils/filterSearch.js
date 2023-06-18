@@ -6,11 +6,13 @@ function searchRecipe(recipes) {
 	for (let i = 0; i < recipes.length; i++ ) {
 		const recipe = recipes[i];
 
+		// Recherche dans le titre
 		let titleExists = false;
 		if ( recipe.name.toLowerCase().indexOf(inputValue) !== -1 ) {
 			titleExists = true;
 		}
 
+		// Recherche dans les ingredients
 		let recipeIngredientExists = false;
 		for ( let j = 0; j < recipe.ingredients.length ; j++ ) {
 
@@ -19,6 +21,7 @@ function searchRecipe(recipes) {
 			}
 		}
 
+		// Rercherche dans la description
 		let recipeDescriptionExists = false;
 		for ( let k = 0; k < recipe.description.length ; k++ ) {
 
@@ -31,6 +34,10 @@ function searchRecipe(recipes) {
 			filterRecipes.push(recipe);
 		}
 	}
+
+	createIngredientsList(filterRecipes);
+	createAppliancesList(filterRecipes);
+	createUstensilsList(filterRecipes);
 
 	return filterRecipes;
 }
@@ -112,7 +119,7 @@ function filterAppliances(recipes, appliance) {
 			filteredRecipes.push(recipe);
 		}
 	}
-	
+		
 	return filteredRecipes;
 }
 
@@ -169,6 +176,8 @@ function filterUstensils(recipes, ustensiles) {
 			filteredRecipes.push(recipe);
 		}
 	}
+
+	createUstensilsList(filteredRecipes);
   
 	return filteredRecipes;
 }
@@ -185,7 +194,5 @@ function searchUstensilItem(ustensilsArray, ustensilsInput) {
 			filteredUstensil.push(item);
 		}
 	}
-	console.log(filteredUstensil);
 	return filteredUstensil;
 }
-  

@@ -17,7 +17,7 @@ function filterRecipes() {
 
 	// filtrer 'recipes' par le champ de recherche (s'il contient 3 caractères ou plus)
 
-	if (mainSearch.value.length >= 3 ) {
+	if (mainSearch.value.trim().length >= 3) {
 		recipes = searchRecipe(recipes);
 
 		if (recipes.length === 0) {
@@ -40,34 +40,36 @@ function filterRecipes() {
 	if (applianceTags.length > 0) {
 		recipes = filterAppliances(recipes, applianceTags);
 	}
-
 	if (ustensilTags.length > 0) {
 		recipes = filterUstensils(recipes, ustensilTags);
 	}
 
-	// Mise à jour des listes des filtres selon les champs de recherche
+	// Création des filtres
 
-	const ingredientInput = document.getElementById("ingredients-input");
-	if (ingredientInput !== null && ingredientInput.value.length >= 3) {
-		ingredientsArray = searchIngredientItem(ingredientsArray, ingredientInput);
-	}
+	createIngredientsFilter(recipes);
+	createAppliancesFilter(recipes);
+	createUstensilsFilter(recipes);
 
-	const applianceInput = document.getElementById("appareils-input");
-	if (applianceInput !== null && applianceInput.value.length >= 3) {
-		applianceArray = searchApplianceItem(applianceArray, applianceInput);
-	}
+	// Affichage des recettes
 
-	const ustensileInput = document.getElementById("ustensiles-input");
-	if (ustensileInput !== null && ustensileInput.value.length >= 3) {
-		ustensilsArray = searchUstensilItem(ustensilsArray, ustensileInput);
-	}
+	displayRecipes(recipes);
+}
+
+// Gestion des evenements du champ de recherche
+
+mainSearch.addEventListener("keyup", function() {
+	filterRecipes();
+	closeOtherFilters(mainSearch);
+});
+
+/*function filtersList(recipes) {
 
 	// extract ingredients, devices and ustensils from 'recipes'
-
+	
 	let ingredientsArray = [];
 	let applianceArray = [];
 	let ustensilsArray = [];
-	
+
 	for ( let i = 0; i < recipes.length; i++ ) {
 		const recipe = recipes[i];
 
@@ -148,25 +150,64 @@ function filterRecipes() {
 				}
 			}
 		}
-  
 	}
 
-	// Création des filtres
+	const ingredientsList = document.querySelector(".filter-ingredients_list");
+	const appliancesList = document.querySelector(".filter-appareils_list");
+	const ustensilsList = document.querySelector(".filter-ustensiles_list");
 
-	createIngredientsFilter(ingredientsArray, ingredientTags);
-	createAppliancesFilter(applianceArray, applianceTags, recipes);
-	createUstensilsFilter(ustensilsArray, ustensilTags, recipes);
+	const ingredientInput = document.getElementById("ingredients-input");
+	if (ingredientInput.value.length > 2) {
+		ingredientsArray = searchIngredientItem(ingredientsArray, ingredientInput);
+	}
 
-	// Affichage des recettes
+	ingredientsList.innerHTML = "";
 
-	displayRecipes(recipes);
+	for (let i = 0; i < ingredientsArray.length; i++) {
+		const name = ingredientsArray[i];
+		const item = createIngredientItem(name, ingredientTags);
+		ingredientsList.appendChild(item);
+	}
 
-	console.log("display recipes");
-}
+	ingredientInput.addEventListener("keyup",function (e) {
+		e.stopPropagation();
+		filtersList(recipes);
+	});
 
-// Gestion des evenements du champ de recherche
+	appliancesList.innerHTML = "";
 
-mainSearch.addEventListener("keyup", function() {
-	filterRecipes();
-	closeOtherFilters(mainSearch);
-});
+	const applianceInput = document.getElementById("appareils-input");
+	if (applianceInput.value.length > 2) {
+		applianceArray = searchApplianceItem(applianceArray, applianceInput);
+	}
+
+	for (let i = 0; i < applianceArray.length; i++) {
+		const name = applianceArray[i];
+		const item = createAppareilItem(name, applianceTags);
+		appliancesList.appendChild(item);
+	}
+
+	applianceInput.addEventListener("keyup",function (e) {
+		e.stopPropagation();
+		filtersList(recipes);
+	});
+
+	ustensilsList.innerHTML = "";
+
+	const ustensileInput = document.getElementById("ustensiles-input");
+	if (ustensileInput.value.length > 2) {
+		ustensilsArray = searchUstensilItem(ustensilsArray, ustensileInput);
+	}
+
+	for (let i = 0; i < ustensilsArray.length; i++) {
+		const name = ustensilsArray[i];
+		const item = createUstensileItem(name, ustensilTags);
+		ustensilsList.appendChild(item);
+	}
+
+	ustensilsList.addEventListener("keyup",function (e) {
+		e.stopPropagation();
+		filtersList(recipes);
+	});
+	console.log("mise à jour des listes");
+}*/

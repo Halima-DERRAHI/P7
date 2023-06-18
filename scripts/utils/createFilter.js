@@ -1,120 +1,132 @@
 // Création du filtre Ingrédients
 
-function createIngredientsFilter(ingredientsArray, ingredientTags) {
+function createIngredientsFilter(recipes) {
 
-	const ingredientInput = document.getElementById("ingredients-input");
 	const filterElement = document.querySelector(".filter-ingredients");
-
-	if  (filterElement.textContent === "") {
-
-		filterElement.innerHTML = "";
-		filterElement.classList.add("select");
-		filterElement.classList.add("filter");
 	
-		const title = document.createElement("span");
-		title.textContent = "Ingrédients";
-		filterElement.appendChild(title);
+	filterElement.innerHTML = "";
+	filterElement.className = "filter-ingredients select filter ";
+
+	const title = document.createElement("span");
+	title.textContent = "Ingrédients";
+	filterElement.appendChild(title);
+
+	const input = document.createElement("input");
+	const inputId = "ingredients-input";
+	input.setAttribute("id", inputId);
+	input.style.display = "none";
+	input.setAttribute("placeholder", "Rechercher un ingrédient");
+	input.setAttribute("autocomplete", "off");
+	input.className = "search-input";
+	filterElement.appendChild(input);
+
+	const iconDiv = document.createElement("div");
+	iconDiv.className = "icon-div";
+
+	const arrowDown = document.createElement("i");
+	arrowDown.className = "fa-solid fa-angle-down fa-lg";
+	arrowDown.style.cursor = "pointer";
+	iconDiv.appendChild(arrowDown);
+
+	const arrowUp = document.createElement("i");
+	arrowUp.className = "fa-solid fa-angle-up fa-lg ingredients";
+	arrowUp.style.cursor = "pointer";
+	arrowUp.style.display = "none";
+	iconDiv.appendChild(arrowUp);
+	filterElement.appendChild(iconDiv);
+
+	const filterList = document.createElement("ul");
+	const listClass = "filter-ingredients_list";
+	filterList.style.display = "none";
+	filterList.className = listClass + " filter-list";
+	filterElement.appendChild(filterList);
+
+	// Gestion des evenements des  fleches
+
+	arrowDown.addEventListener("click", function () {
+		title.style.display = "none";
+		input.style.display = "block";
+		input.value = "";
+		input.focus();
+		arrowDown.style.display = "none";
+		arrowUp.style.display = "block";
+		filterElement.classList.add("active");
+		filterList.style.display = "flex";
+		closeOtherFilters(filterElement);
+		createIngredientsList(recipes);
+	});
 	
-		const input = document.createElement("input");
-		const inputId = "ingredients-input";
-		input.setAttribute("id", inputId);
+	arrowUp.addEventListener("click", function () {
+		title.style.display = "block";
 		input.style.display = "none";
-		input.setAttribute("placeholder", "Rechercher un ingrédient");
-		input.setAttribute("autocomplete", "off");
-		input.className = "search-input";
-		filterElement.appendChild(input);
-
-		// Gestion des evenements du champ de recherche du filtre
-
-		input.addEventListener("keyup",function () {
-			if (input.value.length >= 3) {
-				filterRecipes();
-			}
-		});
-	
-		const iconDiv = document.createElement("div");
-		iconDiv.className = "icon-div";
-	
-		const arrowDown = document.createElement("i");
-		arrowDown.className = "fa-solid fa-angle-down fa-lg";
-		arrowDown.style.cursor = "pointer";
-		iconDiv.appendChild(arrowDown);
-	
-		const arrowUp = document.createElement("i");
-		arrowUp.className = "fa-solid fa-angle-up fa-lg ingredients";
-		arrowUp.style.cursor = "pointer";
+		arrowDown.style.display = "block";
 		arrowUp.style.display = "none";
-		iconDiv.appendChild(arrowUp);
-		filterElement.appendChild(iconDiv);
-	
-		const filterList = document.createElement("ul");
-		const listClass = "filter-ingredients_list";
+		filterElement.classList.remove("active");
 		filterList.style.display = "none";
-		filterList.className = listClass + " filter-list";
-		filterElement.appendChild(filterList);
-	
-		// Création de la liste du filtre
+	});
+}
 
-		for (let i = 0; i < ingredientsArray.length; i++) {
-			const name = ingredientsArray[i];
-			const item = createIngredientItem(name, ingredientTags, arrowUp);
-			filterList.appendChild(item);
-		}
-	
-		// Gestion des evenements des  fleches
+// Création de la liste des ingredients
 
-		arrowDown.addEventListener("click", function () {
-			title.style.display = "none";
-			input.style.display = "block";
-			arrowDown.style.display = "none";
-			arrowUp.style.display = "block";
-			filterElement.classList.add("active");
-			filterList.style.display = "flex";
-			closeOtherFilters(filterElement);
-		});
+function createIngredientsList(recipes) {
+
+	let ingredientsArray = [];
+
+	for ( let i = 0; i < recipes.length; i++ ) {
+		const recipe = recipes[i];
+
+		// Liste des ingrédients
+		for (let j = 0; j < recipe.ingredients.length; j++) {
+			const ingredient = recipe.ingredients[j].ingredient;
 		
-		arrowUp.addEventListener("click", function () {
-			title.style.display = "block";
-			input.style.display = "none";
-			input.value = "";
-			arrowDown.style.display = "block";
-			arrowUp.style.display = "none";
-			filterElement.classList.remove("active");
-			filterList.style.display = "none";
-			filterRecipes();
-		});
-
-	} else {
-
-		// Mise à jour des recettes filtrés
-
-		ingredientInput.addEventListener("keyup",function () {
-			if (ingredientInput.value.length > 0) {
-				filterRecipes();
+			let ingredientExists = false;
+			for (let k = 0; k < ingredientsArray.length; k++) {
+				if (ingredientsArray[k].toLowerCase() === ingredient.toLowerCase()) {
+					ingredientExists = true;
+					break;
+				}
 			}
-		});
-
-		// Mise à jour des elements de la liste des Ingrédients
-
-		const filteredList = document.querySelector(".filter-ingredients_list");
-		const arrowUp = document.querySelector(".fa-angle-up.ingredients");
-		filteredList.innerHTML = "";
-
-		for (let i = 0; i < ingredientsArray.length; i++) {
-
-			const name = ingredientsArray[i];
-			const item = createIngredientItem(name, ingredientTags, arrowUp);
-			
-			filteredList.appendChild(item);
+		
+			if (!ingredientExists) {
+				let tagExists = false;
+				for (let l = 0; l < ingredientTags.length; l++) {
+					if (ingredientTags[l].toLowerCase() === ingredient.toLowerCase()) {
+						tagExists = true;
+						break;
+					}
+				}
+		
+				if (!tagExists) {
+					ingredientsArray.push(ingredient);
+				}
+			}
 		}
+	}	
 
-		filterElement.appendChild(filteredList);
+
+	const ingredientsList = document.querySelector(".filter-ingredients_list");
+	const ingredientInput = document.getElementById("ingredients-input");
+	ingredientsList.innerHTML = "";
+
+	if (ingredientInput.value.length > 2) {
+		ingredientsArray = searchIngredientItem(ingredientsArray, ingredientInput);
 	}
+
+	for (let i = 0; i < ingredientsArray.length; i++) {
+		const name = ingredientsArray[i];
+		const item = createIngredientItem(name, ingredientTags);
+		ingredientsList.appendChild(item);
+	}
+
+	ingredientInput.addEventListener("keyup",function (e) {
+		e.stopPropagation();
+		createIngredientsList(recipes);
+	});
 }
 
 // Création des elements de la liste du filtre Ingrédient
 
-function createIngredientItem(name, ingredientArray, arrowUp) {
+function createIngredientItem(name, ingredientArray) {
 
 	const item = document.createElement("li");
 	item.className = "ingredient-items";
@@ -132,120 +144,138 @@ function createIngredientItem(name, ingredientArray, arrowUp) {
 		}
 	
 		if (!isNameIncluded) {
-			arrowUp.click();
 			createTag(name, "Ingredients", ingredientTags );
 		}
 	}
   
 	item.addEventListener("click", itemClick);
-  
+
 	return item;
 }
 
 // Création du filtre Appareils
 
-function createAppliancesFilter(applianceArray, applianceTags) {
+function createAppliancesFilter(recipes) {
 
 	const filterElement = document.querySelector(".filter-appareils");
-	const applianceInput = document.getElementById("appareils-input");
 
-	if (filterElement.textContent === "") {
-		filterElement.innerHTML = "";
-		filterElement.classList.add("select");
-		filterElement.classList.add("filter");
+	filterElement.innerHTML = "";
+	filterElement.className = "filter-appareils select filter";
 
-		const title = document.createElement("span");
-		title.textContent = "Appareils";
-		filterElement.appendChild(title);
+	const title = document.createElement("span");
+	title.textContent = "Appareils";
+	filterElement.appendChild(title);
 
-		const input = document.createElement("input");
-		const inputId = "appareils-input";
-		input.setAttribute("id", inputId);
+	const input = document.createElement("input");
+	const inputId = "appareils-input";
+	input.setAttribute("id", inputId);
+	input.style.display = "none";
+	input.setAttribute("placeholder", "Rechercher un appareil");
+	input.setAttribute("autocomplete", "off");
+	input.className = "search-input";
+	filterElement.appendChild(input);
+
+	const iconDiv = document.createElement("div");
+	iconDiv.className = "icon-div";
+
+	const arrowDown = document.createElement("i");
+	arrowDown.className = "fa-solid fa-angle-down fa-lg";
+	arrowDown.style.cursor = "pointer";
+	iconDiv.appendChild(arrowDown);
+
+	const arrowUp = document.createElement("i");
+	arrowUp.className = "fa-solid fa-angle-up fa-lg appareils";
+	arrowUp.style.cursor = "pointer";
+	arrowUp.style.display = "none";
+	iconDiv.appendChild(arrowUp);
+	filterElement.appendChild(iconDiv);
+
+	const filterList = document.createElement("ul");
+	const listClass = "filter-appareils_list";
+	filterList.style.display = "none";
+	filterList.className = listClass + " filter-list";
+	filterElement.appendChild(filterList);
+
+	arrowDown.addEventListener("click", function () {
+		title.style.display = "none";
+		input.style.display = "block";
+		input.value = "";
+		input.focus();
+		arrowDown.style.display = "none";
+		arrowUp.style.display = "block";
+		filterElement.classList.add("active");
+		filterList.style.display = "flex";
+		closeOtherFilters(filterElement);
+		createAppliancesList(recipes);
+	});
+
+	arrowUp.addEventListener("click", function () {
+		title.style.display = "block";
 		input.style.display = "none";
-		input.setAttribute("placeholder", "Rechercher un appareil");
-		input.setAttribute("autocomplete", "off");
-		input.className = "search-input";
-		filterElement.appendChild(input);
-
-		input.addEventListener("keyup", function () {
-			if (input.value.length >= 3) {
-				filterRecipes();
-			}
-		});
-
-		const iconDiv = document.createElement("div");
-		iconDiv.className = "icon-div";
-
-		const arrowDown = document.createElement("i");
-		arrowDown.className = "fa-solid fa-angle-down fa-lg";
-		arrowDown.style.cursor = "pointer";
-		iconDiv.appendChild(arrowDown);
-
-		const arrowUp = document.createElement("i");
-		arrowUp.className = "fa-solid fa-angle-up fa-lg appareils";
-		arrowUp.style.cursor = "pointer";
+		arrowDown.style.display = "block";
 		arrowUp.style.display = "none";
-		iconDiv.appendChild(arrowUp);
-		filterElement.appendChild(iconDiv);
-
-		const filterList = document.createElement("ul");
-		const listClass = "filter-appareils_list";
+		filterElement.classList.remove("active");
 		filterList.style.display = "none";
-		filterList.className = listClass + " filter-list";
-		filterElement.appendChild(filterList);
+	});
+}
 
-		for (let i = 0; i < applianceArray.length; i++) {
-			const name = applianceArray[i];
-			const item = createAppareilItem(name, applianceTags, arrowUp);
-			filterList.appendChild(item);
-		}
+// Création de la liste des appareils
 
-		arrowDown.addEventListener("click", function () {
-			title.style.display = "none";
-			input.style.display = "block";
-			arrowDown.style.display = "none";
-			arrowUp.style.display = "block";
-			filterElement.classList.add("active");
-			filterList.style.display = "flex";
-			closeOtherFilters(filterElement);
-		});
+function createAppliancesList(recipes) {
 
-		arrowUp.addEventListener("click", function () {
-			title.style.display = "block";
-			input.style.display = "none";
-			input.value = "";
-			arrowDown.style.display = "block";
-			arrowUp.style.display = "none";
-			filterElement.classList.remove("active");
-			filterList.style.display = "none";
-			filterRecipes();
+	let appliancesArray = [];
 
-		});
-	} else {
-		applianceInput.addEventListener("keyup", function () {
 
-			if ( applianceInput.value.length > 0 ) {
-				filterRecipes();
+	for ( let i = 0; i < recipes.length; i++ ) {
+		const recipe = recipes[i];
+
+		// Liste des appareils
+		let applianceExists = false;
+		for (let j = 0; j < appliancesArray.length; j++) {
+			if (appliancesArray[j].toLowerCase() === recipe.appliance.toLowerCase()) {
+				applianceExists = true;
+				break;
 			}
-		});
-
-		const filteredList = document.querySelector(".filter-appareils_list");
-		const arrowUp = document.querySelector(".fa-angle-up.appareils");
-		filteredList.innerHTML = "";
-
-		for (let i = 0; i < applianceArray.length; i++) {
-			const name = applianceArray[i];
-			const item = createAppareilItem(name, applianceTags, arrowUp);
-			filteredList.appendChild(item);
 		}
 
-		filterElement.appendChild(filteredList);
+		if (!applianceExists) {
+			let applianceTagExists = false;
+			for (let k = 0; k < applianceTags.length; k++) {
+				if (applianceTags[k].toLowerCase() === recipe.appliance.toLowerCase()) {
+					applianceTagExists = true;
+					break;
+				}
+			}
+
+			if (!applianceTagExists) {
+				appliancesArray.push(recipe.appliance);
+			}
+		}
 	}
+
+	const appliancesList = document.querySelector(".filter-appareils_list");
+	const applianceInput = document.getElementById("appareils-input");
+	appliancesList.innerHTML = "";
+
+	if (applianceInput.value.length > 2) {
+		appliancesArray = searchApplianceItem(appliancesArray, applianceInput);
+	}
+
+	for (let i = 0; i < appliancesArray.length; i++) {
+		const name = appliancesArray[i];
+		const item = createAppareilItem(name, applianceTags);
+		appliancesList.appendChild(item);
+	}
+
+	applianceInput.addEventListener("keyup",function (e) {
+		e.stopPropagation();
+		createAppliancesList(recipes);
+	});
 }
 
 // Création des elements de la liste du filtre Appareils
 
-function createAppareilItem(name, appareilArray, arrowUp) {
+function createAppareilItem(name, appareilArray) {
 
 	const item = document.createElement("li");
 	item.className = "appareil-items";
@@ -261,7 +291,6 @@ function createAppareilItem(name, appareilArray, arrowUp) {
 		}
   
 		if (!isNameIncluded) {
-			arrowUp.click();
 			createTag(name, "Appareils", applianceTags);
 		}
 	}
@@ -273,105 +302,130 @@ function createAppareilItem(name, appareilArray, arrowUp) {
 
 // Création du filtre Ustensiles
 
-function createUstensilsFilter(ustensilsArray, ustensilTags) {
+function createUstensilsFilter(recipes) {
 
 	const filterElement = document.querySelector(".filter-ustensiles");
-	const ustensilInput = document.getElementById("ustensiles-input");
 
-	if (filterElement.textContent === "" ) {
-		filterElement.innerHTML = "";
-		filterElement.classList.add("select");
-		filterElement.classList.add("filter");
+	filterElement.innerHTML = "";
+	filterElement.className = "filter-ustensiles select filter"
 
-		const title = document.createElement("span");
-		title.textContent = "Ustensiles";
-		filterElement.appendChild(title);
+	const title = document.createElement("span");
+	title.textContent = "Ustensiles";
+	filterElement.appendChild(title);
 
-		const input = document.createElement("input");
-		const inputId = "ustensiles-input";
-		input.setAttribute("id", inputId);
+	const input = document.createElement("input");
+	const inputId = "ustensiles-input";
+	input.setAttribute("id", inputId);
+	input.style.display = "none";
+	input.setAttribute("placeholder", "Rechercher un ustensile");
+	input.setAttribute("autocomplete", "off");
+	input.className = "search-input";
+	filterElement.appendChild(input);
+
+	const iconDiv = document.createElement("div");
+	iconDiv.className = "icon-div";
+
+	const arrowDown = document.createElement("i");
+	arrowDown.className = "fa-solid fa-angle-down fa-lg";
+	arrowDown.style.cursor = "pointer";
+	iconDiv.appendChild(arrowDown);
+
+	const arrowUp = document.createElement("i");
+	arrowUp.className = "fa-solid fa-angle-up fa-lg ustensiles";
+	arrowUp.style.cursor = "pointer";
+	arrowUp.style.display = "none";
+	iconDiv.appendChild(arrowUp);
+	filterElement.appendChild(iconDiv);
+
+	const filterList = document.createElement("ul");
+	const listClass = "filter-ustensiles_list";
+	filterList.style.display = "none";
+	filterList.className = listClass + " filter-list";
+	filterElement.appendChild(filterList);
+
+	arrowDown.addEventListener("click", function () {
+		title.style.display = "none";
+		input.style.display = "block";
+		input.value = "";
+		input.focus();
+		arrowDown.style.display = "none";
+		arrowUp.style.display = "block";
+		filterElement.classList.add("active");
+		filterList.style.display = "flex";
+		closeOtherFilters(filterElement);
+		createUstensilsList(recipes);
+	});
+
+	arrowUp.addEventListener("click", function () {
+		title.style.display = "block";
 		input.style.display = "none";
-		input.setAttribute("placeholder", "Rechercher un ustensile");
-		input.setAttribute("autocomplete", "off");
-		input.className = "search-input";
-		filterElement.appendChild(input);
-
-		input.addEventListener("keyup", function () {
-			if (input.value.length >= 3) {
-				filterRecipes();
-			}
-		});
-
-		const iconDiv = document.createElement("div");
-		iconDiv.className = "icon-div";
-
-		const arrowDown = document.createElement("i");
-		arrowDown.className = "fa-solid fa-angle-down fa-lg";
-		arrowDown.style.cursor = "pointer";
-		iconDiv.appendChild(arrowDown);
-
-		const arrowUp = document.createElement("i");
-		arrowUp.className = "fa-solid fa-angle-up fa-lg ustensiles";
-		arrowUp.style.cursor = "pointer";
+		arrowDown.style.display = "block";
 		arrowUp.style.display = "none";
-		iconDiv.appendChild(arrowUp);
-		filterElement.appendChild(iconDiv);
-
-		const filterList = document.createElement("ul");
-		const listClass = "filter-ustensiles_list";
+		filterElement.classList.remove("active");
 		filterList.style.display = "none";
-		filterList.className = listClass + " filter-list";
-		filterElement.appendChild(filterList);
+	});
+}
 
-		for (let i = 0; i < ustensilsArray.length; i++) {
-			const name = ustensilsArray[i];
-			const item = createUstensileItem(name, ustensilTags, arrowUp);
-			filterList.appendChild(item);
-		}
+// Création de la listes des ustensiles
 
-		arrowDown.addEventListener("click", function () {
-			title.style.display = "none";
-			input.style.display = "block";
-			arrowDown.style.display = "none";
-			arrowUp.style.display = "block";
-			filterElement.classList.add("active");
-			filterList.style.display = "flex";
-			closeOtherFilters(filterElement);
-		});
+function createUstensilsList(recipes) {
 
-		arrowUp.addEventListener("click", function () {
-			title.style.display = "block";
-			input.style.display = "none";
-			input.value = "";
-			arrowDown.style.display = "block";
-			arrowUp.style.display = "none";
-			filterElement.classList.remove("active");
-			filterList.style.display = "none";
-			filterRecipes();
-		});
-	} else {
-		ustensilInput.addEventListener("keyup", function () {
-			if ( ustensilInput.value.length > 0 ) {
-				filterRecipes();
+	let ustensilsArray = [];
+
+	for ( let i = 0; i < recipes.length; i++ ) {
+		const recipe = recipes[i];
+
+		// Liste des ustensiles
+		for (let j = 0; j < recipe.ustensils.length; j++) {
+			const ustensil = recipe.ustensils[j];
+		
+			let ustensilExists = false;
+			for (let k = 0; k < ustensilsArray.length; k++) {
+				if (ustensilsArray[k].toLowerCase() === ustensil.toLowerCase()) {
+					ustensilExists = true;
+					break;
+				}
 			}
-		});
-
-		const filteredList = document.querySelector(".filter-ustensiles_list");
-		const arrowUp = document.querySelector(".fa-angle-up.ustensiles");
-		filteredList.innerHTML = "";
-
-		for (let i = 0; i < ustensilsArray.length; i++) {
-			const name = ustensilsArray[i];
-			const item = createUstensileItem(name, ustensilTags, arrowUp);
-			filteredList.appendChild(item);
+		
+			if (!ustensilExists) {
+				let ustensilTagExists = false;
+				for (let l = 0; l < ustensilTags.length; l++) {
+					if (ustensilTags[l].toLowerCase() === ustensil.toLowerCase()) {
+						ustensilTagExists = true;
+						break;
+					}
+				}
+		
+				if (!ustensilTagExists) {
+					ustensilsArray.push(ustensil);
+				}
+			}
 		}
-		filterElement.appendChild(filteredList);
 	}
+
+	const ustensilsList = document.querySelector(".filter-ustensiles_list");
+	const ustensileInput = document.getElementById("ustensiles-input");
+	ustensilsList.innerHTML = "";
+
+	if (ustensileInput.value.length > 2) {
+		ustensilsArray = searchUstensilItem(ustensilsArray, ustensileInput);
+	}
+
+	for (let i = 0; i < ustensilsArray.length; i++) {
+		const name = ustensilsArray[i];
+		const item = createUstensileItem(name, ustensilTags);
+		ustensilsList.appendChild(item);
+	}
+
+	ustensileInput.addEventListener("keyup",function (e) {
+		e.stopPropagation();
+		createUstensilsList(recipes);
+	});
 }
 
 // Création des elements de la liste du filtre Ustensiles
 
-function createUstensileItem(name, ustensileArray, arrowUp) {
+function createUstensileItem(name, ustensileArray) {
 
 	const item = document.createElement("li");
 	item.className = "ustensile-items";
@@ -387,7 +441,6 @@ function createUstensileItem(name, ustensileArray, arrowUp) {
 		}
 
 		if (!isNameIncluded) {
-			arrowUp.click();
 			createTag(name, "Ustensiles", ustensilTags );
 		}
 	}
