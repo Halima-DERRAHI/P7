@@ -141,14 +141,14 @@ function searchApplianceItem(applianceArray, applianceInput) {
 
 // Recherche selon les ustensiles
 
-function filterUstensils(recipes, ustensiles) {
+function filterUstensils(recipes, ustensils) {
 	const filteredRecipes = [];
   
 	for (let i = 0; i < recipes.length; i++) {
 		const recipe = recipes[i];
 		let ustensilMatch = false;
 	
-		if (ustensiles.length === 0) {
+		if (ustensils.length === 0) {
 			ustensilMatch = true;
 		} else {
 			const recipeUstensils = recipe.ustensils;
@@ -158,8 +158,8 @@ function filterUstensils(recipes, ustensiles) {
 				const ustensil = recipeUstensils[j];
 				let ustensilFound = false;
   
-				for (let k = 0; k < ustensiles.length; k++) {
-					if (ustensiles[k] === ustensil) {
+				for (let k = 0; k < ustensils.length; k++) {
+					if (ustensils[k] === ustensil) {
 						ustensilFound = true;
 						break;
 					}
