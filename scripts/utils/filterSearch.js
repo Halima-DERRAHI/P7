@@ -83,19 +83,25 @@ function filterUstensils(recipes, ustensils) {
 	
 	const filteredRecipes = [];
   
-	recipes.forEach(recipe =>  {
-
-		ustensils.forEach( ustensil => {
-			const ustensilFound = recipe.ingredients.map(recipeUstensil => recipeUstensil.ustensil).includes(ustensil);
-
-			if (ustensils.length === 0 || ustensilFound) {
-				filteredRecipes.push(recipe);
+	recipes.forEach(recipe => {
+		let ustensilMatch = true;
+	
+		ustensils.forEach(ustensil => {
+			const ustensilFound = recipe.ustensils.includes(ustensil);
+	
+			if (!ustensilFound) {
+				ustensilMatch = false;
 			}
 		});
+	
+		if (ustensilMatch) {
+			filteredRecipes.push(recipe);
+		}
 	});
   
 	return filteredRecipes;
 }
+  
 
 function searchUstensilItem(ustensilsArray, ustensilsInput) {
 

@@ -118,9 +118,8 @@ function createIngredientItem(name, ingredientArray) {
 	// Gestion du click de l'element
 
 	function itemClick() {
-		const isNameIncluded = ingredientArray.includes(name);
 	
-		if (!isNameIncluded) {
+		if (!ingredientArray.includes(name)) {
 			createTag(name, "Ingredients", ingredientTags);
 		}
 	}
