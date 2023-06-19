@@ -110,11 +110,15 @@ function createIngredientsList(recipes) {
 
 	let colneIngredientsArray = ingredientsArray.slice();
 
+	// recherche par le champ input
+
 	const ingredientInput = document.getElementById("ingredients-input");
 
 	if (ingredientInput.value.length > 2) {
 		colneIngredientsArray = searchIngredientItem(colneIngredientsArray, ingredientInput);
 	}
+
+	// affichage des elements de la liste
 
 	const ingredientsList = document.querySelector(".filter-ingredients_list");
 	ingredientsList.innerHTML = "";
@@ -264,11 +268,15 @@ function createAppliancesList(recipes) {
 
 	let colneAppliancesArray = appliancesArray.slice();
 
+	// recherche par le champ input
+
 	const applianceInput = document.getElementById("appareils-input");
 
 	if (applianceInput.value.length > 2) {
 		colneAppliancesArray = searchApplianceItem(appliancesArray, applianceInput);
 	}
+
+	// affichage des elements de la liste
 
 	const appliancesList = document.querySelector(".filter-appareils_list");
 	appliancesList.innerHTML = "";
@@ -419,11 +427,15 @@ function createUstensilsList(recipes) {
 	
 	let colneUstensilsArray = ustensilsArray.slice();
 
+	// recherche par le champ input
+
 	const ustensileInput = document.getElementById("ustensiles-input");
 
 	if (ustensileInput.value.length > 2) {
 		colneUstensilsArray = searchUstensilItem(colneUstensilsArray, ustensileInput);
 	}
+
+	// affichage des elements de la liste
 
 	const ustensilsList = document.querySelector(".filter-ustensiles_list");
 	ustensilsList.innerHTML = "";
