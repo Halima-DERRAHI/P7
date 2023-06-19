@@ -46,7 +46,6 @@ function createIngredientsFilter(recipes) {
 	arrowDown.addEventListener("click", function () {
 		title.style.display = "none";
 		input.style.display = "block";
-		input.value = "";
 		input.focus();
 		arrowDown.style.display = "none";
 		arrowUp.style.display = "block";
@@ -59,6 +58,7 @@ function createIngredientsFilter(recipes) {
 	arrowUp.addEventListener("click", function () {
 		title.style.display = "block";
 		input.style.display = "none";
+		input.value = "";
 		arrowDown.style.display = "block";
 		arrowUp.style.display = "none";
 		filterElement.classList.remove("active");
@@ -199,7 +199,6 @@ function createAppliancesFilter(recipes) {
 	arrowDown.addEventListener("click", function () {
 		title.style.display = "none";
 		input.style.display = "block";
-		input.value = "";
 		input.focus();
 		arrowDown.style.display = "none";
 		arrowUp.style.display = "block";
@@ -212,6 +211,7 @@ function createAppliancesFilter(recipes) {
 	arrowUp.addEventListener("click", function () {
 		title.style.display = "block";
 		input.style.display = "none";
+		input.value = "";
 		arrowDown.style.display = "block";
 		arrowUp.style.display = "none";
 		filterElement.classList.remove("active");
@@ -346,7 +346,6 @@ function createUstensilsFilter(recipes) {
 	arrowDown.addEventListener("click", function () {
 		title.style.display = "none";
 		input.style.display = "block";
-		input.value = "";
 		input.focus();
 		arrowDown.style.display = "none";
 		arrowUp.style.display = "block";
@@ -359,6 +358,7 @@ function createUstensilsFilter(recipes) {
 	arrowUp.addEventListener("click", function () {
 		title.style.display = "block";
 		input.style.display = "none";
+		input.value = "";
 		arrowDown.style.display = "block";
 		arrowUp.style.display = "none";
 		filterElement.classList.remove("active");
