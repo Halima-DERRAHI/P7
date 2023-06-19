@@ -49,9 +49,9 @@ function filterIngredients(recipes, ingredients) {
 function searchIngredientItem(ingredientsArray, ingredientInput) {
 
 	const inputValue = ingredientInput.value.toLowerCase();
-	const filteredIngredients = ingredientsArray.filter(item => item.toLowerCase().includes(inputValue));
+	ingredientsArray = ingredientsArray.filter(item => item.toLowerCase().includes(inputValue));
 	
-	return filteredIngredients;
+	return ingredientsArray;
 }
 
 // Recherche selon les appareils
@@ -73,9 +73,9 @@ function filterAppliances(recipes, appliance) {
 function searchApplianceItem(applianceArray, applianceInput) {
 
 	const inputValue = applianceInput.value.toLowerCase();
-	const filteredAppliances = applianceArray.filter(item => item.toLowerCase().includes(inputValue));
+	applianceArray = applianceArray.filter(item => item.toLowerCase().includes(inputValue));
 	
-	return filteredAppliances;
+	return applianceArray;
 }
 
 // Recherche selon les ustensiles
@@ -107,8 +107,8 @@ function filterUstensils(recipes, ustensils) {
 function searchUstensilItem(ustensilsArray, ustensilsInput) {
 
 	const inputValue = ustensilsInput.value.toLowerCase();
-	const filteredUstensils = ustensilsArray.filter(item => item.toLowerCase().includes(inputValue));
+	ustensilsArray = ustensilsArray.filter(item => item.toLowerCase().includes(inputValue));
 	
-	return filteredUstensils;
+	return ustensilsArray;
 }
   
