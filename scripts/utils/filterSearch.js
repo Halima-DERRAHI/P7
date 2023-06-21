@@ -3,37 +3,19 @@ function searchRecipe(recipes) {
 	const filterRecipes = [];
 	const inputValue = mainSearch.value.toLowerCase();
 	
-	for (let i = 0; i < recipes.length; i++ ) {
-		const recipe = recipes[i];
+	recipes.forEach(recipe => {
+		const titleExists = recipe.name.toLowerCase().includes(inputValue);
 
-		// Recherche dans le titre
-		let titleExists = false;
-		if ( recipe.name.toLowerCase().indexOf(inputValue) !== -1 ) {
-			titleExists = true;
-		}
+		const recipeIngredientExists = recipe.ingredients.filter(ingredient =>
+			ingredient.ingredient.toLowerCase().includes(inputValue)
+		).length > 0;
 
-		// Recherche dans les ingredients
-		let recipeIngredientExists = false;
-		for ( let j = 0; j < recipe.ingredients.length ; j++ ) {
+		const recipeDescriptionExists = recipe.description.toLowerCase().includes(inputValue);
 
-			if ( recipe.ingredients[j].ingredient.toLowerCase().indexOf(inputValue) !== -1 ) {
-				recipeIngredientExists = true;
-			}
-		}
-
-		// Rercherche dans la description
-		let recipeDescriptionExists = false;
-		for ( let k = 0; k < recipe.description.length ; k++ ) {
-
-			if ( recipe.description[k].toLowerCase().indexOf(inputValue) !== -1 ) {
-				recipeDescriptionExists = true;
-			}
-		}
-
-		if ( titleExists || recipeIngredientExists || recipeDescriptionExists ) {
+		if (titleExists || recipeIngredientExists || recipeDescriptionExists) {
 			filterRecipes.push(recipe);
 		}
-	}
+	});
 
 	return filterRecipes;
 }
@@ -41,53 +23,35 @@ function searchRecipe(recipes) {
 // Recherche selon les ingrédients
 
 function filterIngredients(recipes, ingredients) {
+
 	const filteredRecipes = [];
-	
-	for (let i = 0; i < recipes.length; i++) {
-		const recipe = recipes[i];
+
+	recipes.forEach(recipe => {
 		let ingredientMatch = true;
 
-		for (let j = 0; j < ingredients.length; j++) {
-			const ingredient = ingredients[j];
-			let ingredientFound = false;
-
-			for (let k = 0; k < recipe.ingredients.length; k++) {
-				const recipeIngredient = recipe.ingredients[k].ingredient;
-
-				if (recipeIngredient === ingredient) {
-					ingredientFound = true;
-					break;
-				}
-			}
+		ingredients.forEach(ingredient => {
+			const ingredientFound = recipe.ingredients.map(recipeIngredient => recipeIngredient.ingredient).includes(ingredient);
 
 			if (!ingredientFound) {
 				ingredientMatch = false;
-				break;
 			}
-		}
+		});
 
 		if (ingredientMatch) {
 			filteredRecipes.push(recipe);
 		}
-	}
+	});
 
 	return filteredRecipes;
+
 }
 
 function searchIngredientItem(ingredientsArray, ingredientInput) {
 
 	const inputValue = ingredientInput.value.toLowerCase();
-	const filteredIngredients = [];
-  
-	for (let i = 0; i < ingredientsArray.length; i++) {
-		const item = ingredientsArray[i];
+	ingredientsArray = ingredientsArray.filter(item => item.toLowerCase().includes(inputValue));
 	
-		if (item.toLowerCase().indexOf(inputValue) !== -1) {
-			filteredIngredients.push(item);
-		}
-	}
-  
-	return filteredIngredients;
+	return ingredientsArray;
 }
 
 // Recherche selon les appareils
@@ -95,98 +59,56 @@ function searchIngredientItem(ingredientsArray, ingredientInput) {
 function filterAppliances(recipes, appliance) {
 
 	const filteredRecipes = [];
-		
-	for (let i = 0; i < recipes.length; i++) {
-		const recipe = recipes[i];
-		let appareilMatch = false;
-		
-		if (appliance.length === 0) {
-			appareilMatch = true;
-		} else {
-			for (let j = 0; j < appliance.length; j++) {
-				if (appliance[j] === recipe.appliance) {
-					appareilMatch = true;
-					break;
-				}
-			}
-		}
-		
-		if (appareilMatch) {
+
+	recipes.forEach(recipe => {
+		if (appliance.length === 0 || appliance.includes(recipe.appliance)) {
 			filteredRecipes.push(recipe);
 		}
-	}
-		
+	});
+
 	return filteredRecipes;
+
 }
 
 function searchApplianceItem(applianceArray, applianceInput) {
 
 	const inputValue = applianceInput.value.toLowerCase();
-	const filteredAppliance = [];
-  
-	for (let i = 0; i < applianceArray.length; i++) {
-		const item = applianceArray[i];
+	applianceArray = applianceArray.filter(item => item.toLowerCase().includes(inputValue));
 	
-		if (item.toLowerCase().indexOf(inputValue) !== -1) {
-			filteredAppliance.push(item);
-		}
-	}
-  
-	return filteredAppliance;
+	return applianceArray;
 }
 
 // Recherche selon les ustensiles
 
 function filterUstensils(recipes, ustensils) {
+	
 	const filteredRecipes = [];
   
-	for (let i = 0; i < recipes.length; i++) {
-		const recipe = recipes[i];
-		let ustensilMatch = false;
+	recipes.forEach(recipe => {
+		let ustensilMatch = true;
 	
-		if (ustensils.length === 0) {
-			ustensilMatch = true;
-		} else {
-			const recipeUstensils = recipe.ustensils;
-			const numUstensils = recipeUstensils.length;
-  
-			for (let j = 0; j < numUstensils; j++) {
-				const ustensil = recipeUstensils[j];
-				let ustensilFound = false;
-  
-				for (let k = 0; k < ustensils.length; k++) {
-					if (ustensils[k] === ustensil) {
-						ustensilFound = true;
-						break;
-					}
-				}
-  
-				if (ustensilFound) {
-					ustensilMatch = true;
-					break;
-				}
+		ustensils.forEach(ustensil => {
+			const ustensilFound = recipe.ustensils.includes(ustensil);
+	
+			if (!ustensilFound) {
+				ustensilMatch = false;
 			}
-		}
-  
+		});
+	
 		if (ustensilMatch) {
 			filteredRecipes.push(recipe);
 		}
-	}
+	});
   
 	return filteredRecipes;
 }
+  
 
 function searchUstensilItem(ustensilsArray, ustensilsInput) {
 
 	const inputValue = ustensilsInput.value.toLowerCase();
-	const filteredUstensil = [];
-  
-	for (let i = 0; i < ustensilsArray.length; i++) {
-		const item = ustensilsArray[i];
+	ustensilsArray = ustensilsArray.filter(item => item.toLowerCase().includes(inputValue));
 	
-		if (item.toLowerCase().indexOf(inputValue) !== -1) {
-			filteredUstensil.push(item);
-		}
-	}
-	return filteredUstensil;
+	return ustensilsArray;
 }
+  
