@@ -1,3 +1,5 @@
+// Création de l'affichage des recettes
+
 function recipesFactory(recipe) {
 
 	const { image, name, ingredients, time, description } = recipe;

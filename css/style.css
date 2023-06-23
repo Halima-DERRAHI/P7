@@ -12,6 +12,9 @@ body {
   font-family: 'Lato', sans-serif;
   margin: 0 100px 100px 100px;
 }
+
+/*** Header ***/
+
 header {
   display: flex;
   justify-content: center;
@@ -115,7 +118,6 @@ header {
 
 /*** Select ***/
 
-
 .filters-container {
   display: flex;
   justify-self: flex-start;
@@ -157,6 +159,7 @@ header {
   top: 65px;
   padding-bottom: 10px;
 }
+
 .ingredient-items,
 .appareil-items,
 .ustensile-items{
@@ -176,13 +179,11 @@ header {
 .filter-ingredients_items {
   background-color: #3282F7;
 }
-
 .filter-appareils,
 .filter-appareils_list,
 .filter-appareils_items {
   background-color: #68D9A4;
 }
-
 .filter-ustensiles,
 .filter-ustensiles_list,
 .filter-ustensiles_items {
@@ -238,6 +239,9 @@ header {
 .select.active .icon-div {
   width: 50px;
 }
+
+/*** Error message ***/
+
 .error-message {
   text-align: center;
   color: grey;

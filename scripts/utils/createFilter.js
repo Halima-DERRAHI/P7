@@ -138,7 +138,7 @@ function createIngredientItem(name, ingredientArray) {
 	item.className = "ingredient-items";
 	item.textContent = name;
   
-	// Gestion du click de l'element
+	// Gestion de l'element
 
 	function itemClick() {
 		let isNameIncluded = false;
@@ -296,6 +296,8 @@ function createAppareilItem(name, appareilArray) {
 	item.className = "appareil-items";
 	item.textContent = name;
   
+	// Gestion de l'evenement
+
 	function itemClick() {
 		let isNameIncluded = false;
 		for (let i = 0; i < appareilArray.length; i++) {
@@ -454,6 +456,8 @@ function createUstensileItem(name, ustensileArray) {
 	const item = document.createElement("li");
 	item.className = "ustensile-items";
 	item.textContent = name;
+
+	// Gestion de l'evenement
   
 	function itemClick() {
 		let isNameIncluded = false;
@@ -497,12 +501,13 @@ function createTag(name, filterName, taggedArray ) {
 		filterRecipes();
 	});
 
+	// Affichage du tag
+
 	tagDiv.appendChild(tagText);
 	tagDiv.appendChild(closeButton);
 	tagsContainer.appendChild(tagDiv);
 	
 	taggedArray.push(name);
-
 	filterRecipes();
 }
 
