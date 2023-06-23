@@ -81,8 +81,9 @@ function createIngredientsList(recipes) {
 		recipe.ingredients.forEach(ingredientObj => {
 
 			const ingredient = ingredientObj.ingredient;
-			const ingredientExists = ingredientsArray.filter(existingIngredient => existingIngredient.toLowerCase() === ingredient.toLowerCase()).length > 0;
-	
+			const ingredientExists = ingredientsArray
+				.map(existingIngredient => existingIngredient.toLowerCase()).includes(ingredient.toLowerCase().replace(/s$/, ""));
+				
 			if (!ingredientExists) {
 				const tagExists = ingredientTags.filter(existingTag => existingTag.toLowerCase() === ingredient.toLowerCase()).length > 0;
 	
@@ -92,6 +93,8 @@ function createIngredientsList(recipes) {
 			}
 		});
 	});
+
+	console.log(ingredientsArray);
 
 	let cloneIngredientsArray = ingredientsArray.slice();
 
