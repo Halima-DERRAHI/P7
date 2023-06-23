@@ -32,9 +32,16 @@ function filterIngredients(recipes, ingredients) {
 		let ingredientMatch = true;
 
 		ingredients.forEach(ingredient => {
-			
-			const ingredientFound = recipe.ingredients.filter(recipeIngredient => recipeIngredient.ingredient.toLowerCase())
-				.includes(ingredient.toLowerCase()).length > 0;
+			let ingredientFound = false;
+
+			recipe.ingredients.forEach(recipeIngredient => {
+
+				if (recipeIngredient.ingredient.toLowerCase() === ingredient.toLowerCase() || 
+				(recipeIngredient.ingredient.toLowerCase().endsWith("s") && ingredient.toLowerCase() === recipeIngredient.ingredient.toLowerCase().slice(0, -1))
+				) {
+					ingredientFound = true;
+				}
+			});
 
 			if (!ingredientFound) {
 				ingredientMatch = false;
@@ -48,8 +55,6 @@ function filterIngredients(recipes, ingredients) {
 
 	console.log(filteredRecipes);
 	
-	// .replace(/s$/, "")
-
 	return filteredRecipes;
 }
 

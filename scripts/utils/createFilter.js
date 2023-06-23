@@ -80,10 +80,16 @@ function createIngredientsList(recipes) {
 	recipes.forEach(recipe => {
 		recipe.ingredients.forEach(ingredientObj => {
 			const ingredient = ingredientObj.ingredient.toLowerCase();
+			let ingredientsExists = false;
 			
-			const ingredientsExists = ingredientsArray.map(existingIngredient => 
-				existingIngredient.toLowerCase()).includes(ingredient);
-				
+			ingredientsArray.forEach(existingIngredient => {
+				if ((existingIngredient.toLowerCase() === ingredient.toLowerCase()) || 
+				(ingredient.toLowerCase().endsWith("s") && existingIngredient.toLowerCase() === ingredient.toLowerCase().slice(0, -1))
+				) {
+					ingredientsExists = true;
+				}
+			});
+
 			if (!ingredientsExists) {
 				const tagExists = ingredientTags.filter(existingTag => existingTag.toLowerCase() === ingredient.toLowerCase()).length > 0;
 	
