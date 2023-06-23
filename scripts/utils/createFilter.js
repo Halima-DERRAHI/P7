@@ -80,6 +80,7 @@ function createIngredientsList(recipes) {
 	recipes.forEach(recipe => {
 		recipe.ingredients.forEach(ingredientObj => {
 			const ingredient = ingredientObj.ingredient.toLowerCase();
+			
 			const ingredientsExists = ingredientsArray.map(existingIngredient => 
 				existingIngredient.toLowerCase()).includes(ingredient);
 				
