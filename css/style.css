@@ -10,7 +10,8 @@ body {
   max-width: 1400px;
   margin: auto;
   font-family: 'Lato', sans-serif;
-  margin: 0 100px 100px 100px;
+  margin: auto;
+  padding: 0 80px;
 }
 
 /*** Header ***/
