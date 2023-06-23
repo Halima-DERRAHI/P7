@@ -52,8 +52,6 @@ function filterIngredients(recipes, ingredients) {
 			filteredRecipes.push(recipe);
 		}
 	});
-
-	console.log(filteredRecipes);
 	
 	return filteredRecipes;
 }

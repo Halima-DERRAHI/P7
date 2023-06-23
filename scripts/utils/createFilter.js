@@ -100,10 +100,9 @@ function createIngredientsList(recipes) {
 		});
 	});
 
-	console.log(ingredientsArray);
+	// Recherche d'ingredients via l'input ingredient et la créattion de la liste
 
 	let cloneIngredientsArray = ingredientsArray.slice();
-
 	const ingredientInput = document.getElementById("ingredients-input");
 
 	if (ingredientInput.value.length > 2) {
@@ -231,8 +230,9 @@ function createAppliancesList(recipes) {
 		}
 	});
 
-	let cloneAppliancesArray = appliancesArray.slice();
+	// Recherche des appareils via l'input appareil et la créattion de la liste
 
+	let cloneAppliancesArray = appliancesArray.slice();
 	const applianceInput = document.getElementById("appareils-input");
 
 	if (applianceInput.value.length > 2) {
@@ -361,9 +361,10 @@ function createUstensilsList(recipes) {
 			}
 		});
 	});
+
+	// Recherche d'ingredients via l'input ingredient et la créattion de la liste
 	
 	let cloneUstensilsArray = ustensilsArray.slice();
-
 	const ustensileInput = document.getElementById("ustensiles-input");
 
 	if (ustensileInput.value.length > 2) {
