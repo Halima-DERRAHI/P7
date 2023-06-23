@@ -115,7 +115,6 @@ header {
 
 /*** Select ***/
 
-
 .filters-container {
   display: flex;
   justify-self: flex-start;
@@ -157,6 +156,7 @@ header {
   top: 65px;
   padding-bottom: 10px;
 }
+
 .ingredient-items,
 .appareil-items,
 .ustensile-items{
@@ -238,6 +238,8 @@ header {
 .select.active .icon-div {
   width: 50px;
 }
+
+/*** Error message ***/
 
 .error-message {
   text-align: center;

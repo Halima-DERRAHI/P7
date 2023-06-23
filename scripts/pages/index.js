@@ -1,3 +1,5 @@
+// Récuperation des données 
+
 async function getRecipes() {
 
 	const reponse = await fetch("data/recipes.json");
@@ -5,6 +7,8 @@ async function getRecipes() {
 
 	return data.recipes;
 }
+
+// Affichage des recettes
 
 function displayRecipes(recipes) {
 	const recipeContainer = document.querySelector(".recipes-container");
