@@ -79,12 +79,11 @@ function createIngredientsList(recipes) {
 
 	recipes.forEach(recipe => {
 		recipe.ingredients.forEach(ingredientObj => {
-
-			const ingredient = ingredientObj.ingredient;
-			const ingredientExists = ingredientsArray
-				.map(existingIngredient => existingIngredient.toLowerCase()).includes(ingredient.toLowerCase().replace(/s$/, ""));
+			const ingredient = ingredientObj.ingredient.toLowerCase();
+			const ingredientsExists = ingredientsArray.map(existingIngredient => 
+				existingIngredient.toLowerCase()).includes(ingredient);
 				
-			if (!ingredientExists) {
+			if (!ingredientsExists) {
 				const tagExists = ingredientTags.filter(existingTag => existingTag.toLowerCase() === ingredient.toLowerCase()).length > 0;
 	
 				if (!tagExists) {

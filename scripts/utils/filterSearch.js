@@ -32,7 +32,7 @@ function filterIngredients(recipes, ingredients) {
 		let ingredientMatch = true;
 
 		ingredients.forEach(ingredient => {
-			const ingredientFound = recipe.ingredients.map(recipeIngredient => recipeIngredient.ingredient.toLowerCase().replace(/s$/, "")).includes(ingredient.toLowerCase());
+			const ingredientFound = recipe.ingredients.map(recipeIngredient => recipeIngredient.ingredient.toLowerCase()).includes(ingredient.toLowerCase());
 
 			if (!ingredientFound) {
 				ingredientMatch = false;
@@ -45,6 +45,8 @@ function filterIngredients(recipes, ingredients) {
 	});
 
 	console.log(filteredRecipes);
+	
+	// .replace(/s$/, "")
 
 	return filteredRecipes;
 }
