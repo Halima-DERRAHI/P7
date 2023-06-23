@@ -111,27 +111,9 @@ function createIngredientsList(recipes) {
 		}
 	}	
 
+	console.log(ingredientsArray);
+
 	let colneIngredientsArray = ingredientsArray.slice();
-
-
-
-/*
-	for ( let i = 0; i < recipes.length; i++ ) {
-		const recipe = recipes[i];
-
-		for (let j = 0; j < recipe.ingredients.length; j++) {
-			const ingredient = recipe.ingredients[j].ingredient;
-			for (let k = 0; k < ingredientsArray.length; k++) {
-				
-				if (ingredient.toLowerCase().endsWith("s") && ingredientsArray[k].toLowerCase() === ingredient.toLowerCase().slice(0, -1)) {
-					console.log(currentIngredient);
-				}
-			}
-		}
-	}*/
-
-
-
 
 	// recherche par le champ input
 
