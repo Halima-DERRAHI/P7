@@ -52,13 +52,15 @@ function filterIngredients(recipes, ingredients) {
 		let ingredientMatch = true;
 
 		for (let j = 0; j < ingredients.length; j++) {
-			const ingredient = ingredients[j];
+			const ingredient = ingredients[j].toLowerCase();
 			let ingredientFound = false;
 
 			for (let k = 0; k < recipe.ingredients.length; k++) {
-				const recipeIngredient = recipe.ingredients[k].ingredient;
+				const recipeIngredient = recipe.ingredients[k].ingredient.toLowerCase();
 
-				if (recipeIngredient === ingredient) {
+				if ((recipeIngredient === ingredient) ||
+				(recipeIngredient.endsWith("s") && recipeIngredient.slice(0, -1) === ingredient)
+				) {
 					ingredientFound = true;
 					break;
 				}

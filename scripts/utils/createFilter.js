@@ -83,10 +83,13 @@ function createIngredientsList(recipes) {
 		// Liste des ingrédients
 		for (let j = 0; j < recipe.ingredients.length; j++) {
 			const ingredient = recipe.ingredients[j].ingredient;
-		
+
 			let ingredientExists = false;
+
 			for (let k = 0; k < ingredientsArray.length; k++) {
-				if (ingredientsArray[k].toLowerCase() === ingredient.toLowerCase()) {
+				if ((ingredientsArray[k].toLowerCase() === ingredient.toLowerCase()) || 
+				(ingredient.toLowerCase().endsWith("s") && ingredientsArray[k].toLowerCase() === ingredient.toLowerCase().slice(0, -1))
+				) {
 					ingredientExists = true;
 					break;
 				}
@@ -109,6 +112,26 @@ function createIngredientsList(recipes) {
 	}	
 
 	let colneIngredientsArray = ingredientsArray.slice();
+
+
+
+/*
+	for ( let i = 0; i < recipes.length; i++ ) {
+		const recipe = recipes[i];
+
+		for (let j = 0; j < recipe.ingredients.length; j++) {
+			const ingredient = recipe.ingredients[j].ingredient;
+			for (let k = 0; k < ingredientsArray.length; k++) {
+				
+				if (ingredient.toLowerCase().endsWith("s") && ingredientsArray[k].toLowerCase() === ingredient.toLowerCase().slice(0, -1)) {
+					console.log(currentIngredient);
+				}
+			}
+		}
+	}*/
+
+
+
 
 	// recherche par le champ input
 
