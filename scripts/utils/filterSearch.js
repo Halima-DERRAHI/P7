@@ -1,3 +1,5 @@
+// Recherche par la barre de recherche principale
+
 function searchRecipe(recipes) {
 
 	const filterRecipes = [];
