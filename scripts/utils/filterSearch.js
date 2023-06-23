@@ -18,6 +18,7 @@ function searchRecipe(recipes) {
 
 			if ( recipe.ingredients[j].ingredient.toLowerCase().indexOf(inputValue) !== -1 ) {
 				recipeIngredientExists = true;
+				break;
 			}
 		}
 
@@ -27,12 +28,12 @@ function searchRecipe(recipes) {
 
 			if ( recipe.description[k].toLowerCase().indexOf(inputValue) !== -1 ) {
 				recipeDescriptionExists = true;
+				break;
 			}
 		}
 
 		if ( titleExists || recipeIngredientExists || recipeDescriptionExists ) {
 			filterRecipes.push(recipe);
-			break;
 		}
 	}
 
