@@ -2,10 +2,9 @@
 
 function searchRecipe(recipes) {
 
-	const filterRecipes = [];
 	const inputValue = mainSearch.value.toLowerCase();
 	
-	recipes.forEach(recipe => {
+	const filterRecipes = recipes.filter(recipe => {
 		const titleExists = recipe.name.toLowerCase().includes(inputValue);
 
 		const recipeIngredientExists = recipe.ingredients.filter(ingredient =>
@@ -14,9 +13,8 @@ function searchRecipe(recipes) {
 
 		const recipeDescriptionExists = recipe.description.toLowerCase().includes(inputValue);
 
-		if (titleExists || recipeIngredientExists || recipeDescriptionExists) {
-			filterRecipes.push(recipe);
-		}
+		return titleExists || recipeIngredientExists || recipeDescriptionExists;
+		
 	});
 
 	return filterRecipes;
