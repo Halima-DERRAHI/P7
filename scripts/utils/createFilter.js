@@ -111,8 +111,6 @@ function createIngredientsList(recipes) {
 		}
 	}	
 
-	console.log(ingredientsArray);
-
 	let colneIngredientsArray = ingredientsArray.slice();
 
 	// recherche par le champ input
